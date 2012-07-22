@@ -7,7 +7,6 @@
   " 一般设定
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   runtime! debian.vim
-  "set compatible
 
   "颜色
   colorscheme molokai
@@ -232,6 +231,7 @@
   Bundle 'Pydiction'
   Bundle 'ZenCoding.vim'
   "Bundle 'word_complete.vim'
+  Bundle 'closetag.vim'
 
   "PHP 
   "press K on a function for full PHP manual
@@ -239,6 +239,7 @@
 
   "Tools
   """"""""""""""""""""""""""""""
+  Bundle 'udonmai/Conque-Shell'
   Bundle 'grep.vim'
   Bundle 'vim-flake8'
 
@@ -314,7 +315,7 @@
     autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
     autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o
     autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python setlocal textwidth=100
-    autocmd Filetype html,xml,xsl source $VIMRUNTIME/plugin/closetag.vim
+    autocmd Filetype html,xml,xsl source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
     autocmd BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \ exe " normal g`\"" |
