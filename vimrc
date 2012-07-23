@@ -215,6 +215,7 @@
   """""""""""""""""""""""""""""""
   Bundle 'winmanager'
   Bundle 'scrooloose/nerdtree'
+  Bundle 'scrooloose/nerdcommenter'
   Bundle 'taglist.vim'
   Bundle 'fholgado/minibufexpl.vim'
   "Bundle 'bufexplorer.zip'
@@ -418,7 +419,7 @@
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   "NerdCommenter
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
-  let NERDShutUp=1
+
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   "Grep F3-工程内查找
@@ -437,18 +438,18 @@
   set textwidth=110
 
   " PHP syntax check
-  function! PHP_CheckSyntax()
-  setlocal makeprg=d:/apmxe/bin/php526/php.exe\ -l\ -n\ -d\ html_errors=off
-  setlocal shellpipe=>
+  "function! PHP_CheckSyntax()
+  "setlocal makeprg=d:/apmxe/bin/php526/php.exe\ -l\ -n\ -d\ html_errors=off
+  "setlocal shellpipe=>
   " Use error format for parsing PHP error output
-  setlocal errorformat=%m\ in\ %f\ on\ line\ %l
-  make %
-  endfunction
+  "setlocal errorformat=%m\ in\ %f\ on\ line\ %l
+  "make %
+  "endfunction
   " Perform :PHP_CheckSyntax()
-  map <F5> :call PHP_CheckSyntax()<CR>
+  "map <F5> :call PHP_CheckSyntax()<CR>
 
   "配置路径
-  set runtimepath +=$HOME/.vim/phpdoc
+  "set runtimepath +=$HOME/.vim/phpdoc
 
   "配置vimrc, 使得keywordprg=”help” 注：一般情况下，keywordprg默认是!man或!man -s
   autocmd BufNewFile,Bufread *.module,*.inc,*.php set keywordprg="help"
