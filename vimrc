@@ -206,7 +206,7 @@
   Bundle 'groenewege/vim-less'
   Bundle 'Markdown'
   Bundle 'Markdown-syntax'
-  Bundle 'php.vim-html-enhanced'
+  "Bundle 'php.vim-html-enhanced' "一个TAB为3个空格 = =
   "Bundle 'css_color.vim' 
   "增加了rgb显示颜色和同行显示多处颜色
   Bundle 'skammer/vim-css-color'
@@ -225,18 +225,25 @@
 
   "AutoComplete
   """""""""""""""""""""""""""""""
-  Bundle 'msanders/snipmate.vim'
-  "Bundle 'garbas/vim-snipmate'
-  "Bundle 'spf13/snipmate-snippets'
+  "Bundle 'AutoComplPop'
+  "Bundle 'msanders/snipmate.vim' "自带了snippets
+  "Bundle 'Pydiction'
   Bundle 'Shougo/neocomplcache'
-  Bundle 'Pydiction'
+  Bundle 'MarcWeber/vim-addon-mw-utils'
+  Bundle 'tomtom/tlib_vim'
+  "Bundle 'honza/snipmate-snippets'
+  Bundle 'spf13/snipmate-snippets'
+  Bundle 'garbas/vim-snipmate'
+
   Bundle 'ZenCoding.vim'
+  let g:user_zen_expandabbr_key='<C-u>'
+
   "Bundle 'word_complete.vim'
   Bundle 'closetag.vim'
 
   "PHP 
   "press K on a function for full PHP manual
-  "Bundle 'spf13/PIV'
+  Bundle 'spf13/PIV'
 
   "Tools
   """"""""""""""""""""""""""""""
@@ -254,6 +261,15 @@
   "
   " see :h vundle for more details or wiki for FAQ
   " NOTE: comments after Bundle command are not allowed..
+
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " 补充
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " JavaScript 语法高亮
+  au FileType html,javascript let g:javascript_enable_domhtmlcss = 1
+  au BufRead,BufNewFile *.js setf jquery
+  
+
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " CTags的设定
@@ -316,7 +332,8 @@
     autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
     autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o
     autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python setlocal textwidth=100
-    autocmd Filetype html,xml,xsl source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
+	autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
+	autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
     autocmd BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \ exe " normal g`\"" |
@@ -462,16 +479,88 @@
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   "pydiction 1.2 python auto complete
   "filetype plugin on
-  let g:pydiction_location = '~/.vim/bundle/Pydiction'
+  "let g:pydiction_location = '~/.vim/bundle/Pydiction'
   "defalut g:pydiction_menu_height == 15	
   "let g:pydiction_menu_height = 20 
-  
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " NeoComplCache
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  let g:neocomplcache_enable_at_startup = 1
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Powerline
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  "let g:Powerline_symbols = 'fancy'
+  "let g:Powerline_symbols = 'fancy'  " 启用 smartcase.
+
+
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " NeoComplCache
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " 停用 AutoComplPop.
+  "let g:acp_enableAtStartup = 0
+  " 启用 neocomplcache.
+  let g:neocomplcache_enable_at_startup = 1
+
+  let g:neocomplcache_enable_smart_case = 1
+  " 启用大写字母补全.
+  let g:neocomplcache_enable_camel_case_completion = 1
+  " 启用下划线补全.
+  let g:neocomplcache_enable_underbar_completion = 1
+  " 设定最小语法关键词长度.
+  let g:neocomplcache_min_syntax_length = 3
+  let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+  	" 定义字典.
+  let g:neocomplcache_dictionary_filetype_lists = {
+      \ 'default' : '',
+      \ 'vimshell' : $HOME.'/.vimshell_hist',
+      \ 'scheme' : $HOME.'/.gosh_completions'
+         \ }
+
+  " 定义关键词.
+  if !exists('g:neocomplcache_keyword_patterns')
+      let g:neocomplcache_keyword_patterns = {}
+  endif
+  let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+  
+  " 插件键映射.
+  imap <C-k>     <Plug>(neocomplcache_snippets_expand)
+  smap <C-k>     <Plug>(neocomplcache_snippets_expand)
+  inoremap <expr><C-g>     neocomplcache#undo_completion()
+  inoremap <expr><C-l>     neocomplcache#complete_common_string()
+  
+  " 类似于SuperTab用法 .
+  "imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+
+  " 推荐的键映射.
+  " <CR>: close popup and save indent.
+  inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+  " <TAB>: completion. NO USE with snipmate
+  "inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  " <C-h>, <BS>: close popup and delete backword char.
+  inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+  inoremap <expr><C-Y>  neocomplcache#close_popup()
+  inoremap <expr><C-e>  neocomplcache#cancel_popup()
+  "inoremap <expr><Enter>  pumvisible() ? neocomplcache#close_popup()."\<C-n>" : "\<Enter>"
+  inoremap <expr><Enter>  pumvisible() ? "\<C-Y>" : "\<Enter>"
+  
+  " 类似于AutoComplPop用法 .
+  let g:neocomplcache_enable_auto_select = 1
+  " 类似于 Shell 用法(不推荐).
+  "set completeopt+=longest
+  "let g:neocomplcache_enable_auto_select = 1
+  "let g:neocomplcache_disable_auto_complete = 1
+  "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<TAB>"
+  "inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+  
+  " 启用 omni 补全.
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  
+  " 启用 heavy omni 补全.
+  if !exists('g:neocomplcache_omni_patterns')
+  	let g:neocomplcache_omni_patterns = {}
+  endif
+  "let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+  "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+  let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+
