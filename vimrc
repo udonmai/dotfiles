@@ -3,10 +3,92 @@
   "  source /etc/vim/vimrc.local
   "endif
 
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Vundle
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+  " BundleInstall
+
+  set nocompatible	" be iMproved
+  filetype off		" required!
+
+  set rtp+=~/.vim/bundle/vundle/ 
+  call vundle#rc()
+
+  " let Vundle manage Vundle
+  " required
+  Bundle 'gmarik/vundle'
+
+  " My Bundle here:
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  "语法高亮
+  """""""""""""""""""""""""""""""
+  Bundle 'JavaScript-syntax'
+  Bundle 'jQuery'
+  Bundle 'othree/html5.vim'
+  Bundle 'groenewege/vim-less'
+  Bundle 'Markdown'
+  Bundle 'Markdown-syntax'
+  "Bundle 'php.vim-html-enhanced' "一个TAB为3个空格 = =
+  "Bundle 'css_color.vim' 
+  "增加了rgb显示颜色和同行显示多处颜色
+  Bundle 'skammer/vim-css-color'
+
+  "above the Vim UI
+  """""""""""""""""""""""""""""""
+  Bundle 'winmanager'
+  Bundle 'scrooloose/nerdtree'
+  Bundle 'scrooloose/nerdcommenter'
+  Bundle 'taglist.vim'
+  Bundle 'fholgado/minibufexpl.vim'
+  "Bundle 'bufexplorer.zip'
+  Bundle 'Lokaltog/vim-powerline'
+  "Make gvim-only colorschemes work transparently in terminal vim
+  Bundle 'CSApprox' 
+
+  "AutoComplete
+  """""""""""""""""""""""""""""""
+  "Bundle 'AutoComplPop'
+  "Bundle 'msanders/snipmate.vim' "自带了snippets
+  "Bundle 'Pydiction'
+  Bundle 'Shougo/neocomplcache'
+  Bundle 'MarcWeber/vim-addon-mw-utils'
+  Bundle 'tomtom/tlib_vim'
+  "Bundle 'honza/snipmate-snippets'
+  Bundle 'spf13/snipmate-snippets'
+  Bundle 'garbas/vim-snipmate'
+
+  Bundle 'ZenCoding.vim'
+  let g:user_zen_expandabbr_key='<C-u>'
+
+  "Bundle 'word_complete.vim'
+  Bundle 'closetag.vim'
+
+  "PHP 
+  "press K on a function for full PHP manual
+  Bundle 'spf13/PIV'
+
+  "Tools
+  """"""""""""""""""""""""""""""
+  Bundle 'udonmai/Conque-Shell'
+  Bundle 'grep.vim'
+  Bundle 'vim-flake8'
+
+  filetype plugin indent on     " required!
+  "
+  " Brief help
+  " :BundleList          - list configured bundles
+  " :BundleInstall(!)    - install(update) bundles
+  " :BundleSearch(!) foo - search(or refresh cache first) for foo
+  " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+  "
+  " see :h vundle for more details or wiki for FAQ
+  " NOTE: comments after Bundle command are not allowed..
+
 """""""""""""""""""""""""""""""""""""Ace"""""""""""""""""""""""""""""""""""""
   " 一般设定
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  runtime! debian.vim
+  "runtime! debian.vim
 
   "颜色
   colorscheme molokai
@@ -179,88 +261,6 @@
   " 在行和段开始处使用制表符
   set smarttab
 
-
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Vundle
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-  " BundleInstall
-
-  set nocompatible	" be iMproved
-  filetype off		" required!
-
-  set rtp+=~/.vim/bundle/vundle/ 
-  call vundle#rc()
-
-  " let Vundle manage Vundle
-  " required
-  Bundle 'gmarik/vundle'
-
-  " My Bundle here:
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  "语法高亮
-  """""""""""""""""""""""""""""""
-  Bundle 'JavaScript-syntax'
-  Bundle 'jQuery'
-  Bundle 'othree/html5.vim'
-  Bundle 'groenewege/vim-less'
-  Bundle 'Markdown'
-  Bundle 'Markdown-syntax'
-  "Bundle 'php.vim-html-enhanced' "一个TAB为3个空格 = =
-  "Bundle 'css_color.vim' 
-  "增加了rgb显示颜色和同行显示多处颜色
-  Bundle 'skammer/vim-css-color'
-
-  "above the Vim UI
-  """""""""""""""""""""""""""""""
-  Bundle 'winmanager'
-  Bundle 'scrooloose/nerdtree'
-  Bundle 'scrooloose/nerdcommenter'
-  Bundle 'taglist.vim'
-  Bundle 'fholgado/minibufexpl.vim'
-  "Bundle 'bufexplorer.zip'
-  Bundle 'Lokaltog/vim-powerline'
-  "Make gvim-only colorschemes work transparently in terminal vim
-  Bundle 'CSApprox' 
-
-  "AutoComplete
-  """""""""""""""""""""""""""""""
-  "Bundle 'AutoComplPop'
-  "Bundle 'msanders/snipmate.vim' "自带了snippets
-  "Bundle 'Pydiction'
-  Bundle 'Shougo/neocomplcache'
-  Bundle 'MarcWeber/vim-addon-mw-utils'
-  Bundle 'tomtom/tlib_vim'
-  "Bundle 'honza/snipmate-snippets'
-  Bundle 'spf13/snipmate-snippets'
-  Bundle 'garbas/vim-snipmate'
-
-  Bundle 'ZenCoding.vim'
-  let g:user_zen_expandabbr_key='<C-u>'
-
-  "Bundle 'word_complete.vim'
-  Bundle 'closetag.vim'
-
-  "PHP 
-  "press K on a function for full PHP manual
-  Bundle 'spf13/PIV'
-
-  "Tools
-  """"""""""""""""""""""""""""""
-  Bundle 'udonmai/Conque-Shell'
-  Bundle 'grep.vim'
-  Bundle 'vim-flake8'
-
-  filetype plugin indent on     " required!
-  "
-  " Brief help
-  " :BundleList          - list configured bundles
-  " :BundleInstall(!)    - install(update) bundles
-  " :BundleSearch(!) foo - search(or refresh cache first) for foo
-  " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-  "
-  " see :h vundle for more details or wiki for FAQ
-  " NOTE: comments after Bundle command are not allowed..
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " 补充
