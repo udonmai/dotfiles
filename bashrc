@@ -59,6 +59,9 @@ fi
 # git completion
 source ~/dotfiles/git-completion.bash
 
+# homebrew completion
+source `brew --prefix`/Library/Contributions/brew_bash_completion.sh
+
 #export PS1="\u@\h:\w $"
 export PS1="\[\e[35m\]\u\[\e[37m\] at \[\e[34m\]\h\[\e[37m\] in \[\e[34;47m\]\w\[\e[0m\] \[\e[0;1m\]$ \[\e[0m\]"
 export CLICOLOR=1
