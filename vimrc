@@ -52,11 +52,16 @@
   "Bundle 'AutoComplPop'
   "Bundle 'msanders/snipmate.vim' "自带了snippets
   "Bundle 'Pydiction'
-  "Bundle 'Shougo/neocomplcache'
-  "Bundle 'Shougo/neosnippet'
-  Bundle 'Valloric/YouCompleteMe'
-  Bundle 'MarcWeber/vim-addon-mw-utils'
-  Bundle 'tomtom/tlib_vim'
+  
+  Bundle 'Rip-Rip/clang_complete'
+  Bundle 'Shougo/neocomplcache'
+  Bundle 'Shougo/neosnippet'
+  
+  "Bundle 'Valloric/YouCompleteMe'
+  
+  " support for snipmate 
+  "Bundle 'MarcWeber/vim-addon-mw-utils'
+  "Bundle 'tomtom/tlib_vim'
   "Bundle 'honza/snipmate-snippets'
   "Bundle 'spf13/snipmate-snippets'
   "Bundle 'garbas/vim-snipmate'
@@ -97,8 +102,10 @@
   colorscheme molokai
 
   "字体
-  set guifontwide=YaHei\ Consolas\ Hybrid\ 12 
-  set guifont=YaHei\ Consolas\ Hybrid\ 12 
+  set guifontwide=Monaco:h13
+  set guifont=Monaco:h13
+  "set guifontwide=YaHei\ Consolas\ Hybrid\ 12 
+  "set guifont=YaHei\ Consolas\ Hybrid\ 12 
 
   " 设定默认解码
   set enc=utf-8
@@ -489,7 +496,7 @@
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Powerline
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  "let g:Powerline_symbols = 'fancy'  " 启用 smartcase.
+  let g:Powerline_symbols = 'fancy'  " 启用 smartcase.
 
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -498,48 +505,48 @@
   " 停用 AutoComplPop.
   "let g:acp_enableAtStartup = 0
   " 启用 neocomplcache.
-  """let g:neocomplcache_enable_at_startup = 1
+  let g:neocomplcache_enable_at_startup = 1
 
-  """let g:neocomplcache_enable_smart_case = 1
+  let g:neocomplcache_enable_smart_case = 1
   " 启用大写字母补全.
-  """let g:neocomplcache_enable_camel_case_completion = 1
+  let g:neocomplcache_enable_camel_case_completion = 1
   " 启用下划线补全.
-  """let g:neocomplcache_enable_underbar_completion = 1
+  let g:neocomplcache_enable_underbar_completion = 1
   " 设定最小语法关键词长度.
-  """let g:neocomplcache_min_syntax_length = 2 
-  """let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+  let g:neocomplcache_min_syntax_length = 2 
+  let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
   	" 定义字典.
-  """let g:neocomplcache_dictionary_filetype_lists = {
-  ""    \ 'default' : '',
-  ""    \ 'vimshell' : $HOME.'/.vimshell_hist',
-  ""    \ 'scheme' : $HOME.'/.gosh_completions'
-  ""       \ }
+  let g:neocomplcache_dictionary_filetype_lists = {
+      \ 'default' : '',
+      \ 'vimshell' : $HOME.'/.vimshell_hist',
+      \ 'scheme' : $HOME.'/.gosh_completions'
+         \ }
 
   " 定义关键词.
-  """if !exists('g:neocomplcache_keyword_patterns')
-  ""    let g:neocomplcache_keyword_patterns = {}
-  ""endif
-  """let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+  if !exists('g:neocomplcache_keyword_patterns')
+      let g:neocomplcache_keyword_patterns = {}
+  endif
+  let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
   
   " 插件键映射.
-  """imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-  """smap <C-k>     <Plug>(neocomplcache_snippets_expand)
-  """inoremap <expr><C-g>     neocomplcache#undo_completion()
-  """inoremap <expr><C-l>     neocomplcache#complete_common_string()
+  imap <C-k>     <Plug>(neocomplcache_snippets_expand)
+  smap <C-k>     <Plug>(neocomplcache_snippets_expand)
+  inoremap <expr><C-g>     neocomplcache#undo_completion()
+  inoremap <expr><C-l>     neocomplcache#complete_common_string()
   
   " 类似于SuperTab用法 .
   "imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 
   " 推荐的键映射.
   " <CR>: close popup and save indent.
-  """inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+  inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
   " <TAB>: completion. NO USE with snipmate
-  """inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
   " <C-h>, <BS>: close popup and delete backword char.
-  """inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-  """inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-  """inoremap <expr><C-Y>  neocomplcache#close_popup()
-  """inoremap <expr><C-e>  neocomplcache#cancel_popup()
+  inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+  inoremap <expr><C-Y>  neocomplcache#close_popup()
+  inoremap <expr><C-e>  neocomplcache#cancel_popup()
   
   "inoremap <expr><Enter>  pumvisible() ? neocomplcache#close_popup()."\<C-n>" : "\<Enter>"
   "inoremap <expr><Enter>  pumvisible() ? "\<C-Y>" : "\<Enter>"
@@ -554,32 +561,32 @@
   "inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
   
   " 启用 omni 补全.
-  """autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  """autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  """autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  """ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  """autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
   
   " 启用 heavy omni 补全.
-  """if !exists('g:neocomplcache_omni_patterns')
-  ""	let g:neocomplcache_omni_patterns = {}
-  """endif
+  if !exists('g:neocomplcache_omni_patterns')
+  	let g:neocomplcache_omni_patterns = {}
+  endif
   "let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
   "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-  """let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+  let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
   
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " NeoSnippet
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   "Plugin key-mappings.
-  """imap <C-k>	 <Plug>(neosnippet_expand_or_jump)
-  """smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  imap <C-k>	 <Plug>(neosnippet_expand_or_jump)
+  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 
   "SuperTab like snippets behavior.
-  """imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-  """smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+  smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
  
   "For snippet_complete marker.
-  """if has('conceal')
-  """  set conceallevel=2 concealcursor=i
-  """endif
+  if has('conceal')
+    set conceallevel=2 concealcursor=i
+  endif
