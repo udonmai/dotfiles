@@ -52,8 +52,9 @@
   "Bundle 'AutoComplPop'
   "Bundle 'msanders/snipmate.vim' "自带了snippets
   "Bundle 'Pydiction'
-  Bundle 'Shougo/neocomplcache'
-  Bundle 'Shougo/neosnippet'
+  "Bundle 'Shougo/neocomplcache'
+  "Bundle 'Shougo/neosnippet'
+  Bundle 'Valloric/YouCompleteMe'
   Bundle 'MarcWeber/vim-addon-mw-utils'
   Bundle 'tomtom/tlib_vim'
   "Bundle 'honza/snipmate-snippets'

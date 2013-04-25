@@ -56,12 +56,14 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+# git completion
+source ~/dotfiles/git-completion.bash
+
 #export PS1="\u@\h:\w $"
 export PS1="\[\e[35m\]\u\[\e[37m\] at \[\e[34m\]\h\[\e[37m\] in \[\e[34;47m\]\w\[\e[0m\] \[\e[0;1m\]$ \[\e[0m\]"
 export CLICOLOR=1
 export LSCOLORS=fxgxaxdxcxegehabagacah
 export CLICOLOR="xterm-color"
 export GREP_OPTIONS="--color=auto"
-
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
