@@ -68,5 +68,3 @@ export CLICOLOR=1
 export LSCOLORS=fxgxaxdxcxegehabagacah
 export CLICOLOR="xterm-color"
 export GREP_OPTIONS="--color=auto"
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

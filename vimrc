@@ -21,7 +21,7 @@
 
   " My Bundle here:
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  "语法高亮
+  " 语法高亮
   """""""""""""""""""""""""""""""
   Bundle 'molokai'
   Bundle 'JavaScript-syntax'
@@ -34,9 +34,8 @@
   "Bundle 'css_color.vim' 
   "增加了rgb显示颜色和同行显示多处颜色
   Bundle 'skammer/vim-css-color'
-  "Bundle 'Valloric/vim-operator-highlight'
 
-  "above the Vim UI
+  " UI
   """""""""""""""""""""""""""""""
   Bundle 'winmanager'
   Bundle 'scrooloose/nerdtree'
@@ -48,7 +47,7 @@
   "Make gvim-only colorschemes work transparently in terminal vim
   Bundle 'CSApprox' 
 
-  "AutoComplete
+  " AutoComplete
   """""""""""""""""""""""""""""""
   "Bundle 'AutoComplPop'
   "Bundle 'msanders/snipmate.vim' "自带了snippets
@@ -73,11 +72,11 @@
   "Bundle 'word_complete.vim'
   Bundle 'closetag.vim'
 
-  "PHP 
-  "press K on a function for full PHP manual
+  " PHP 
+  " press K on a function for full PHP manual
   Bundle 'spf13/PIV'
 
-  "Tools
+  " Tools
   """"""""""""""""""""""""""""""
   Bundle 'udonmai/Conque-Shell'
   Bundle 'grep.vim'
