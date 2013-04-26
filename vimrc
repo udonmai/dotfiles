@@ -515,13 +515,13 @@
   " 设定最小语法关键词长度.
   let g:neocomplcache_min_syntax_length = 2 
   let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-  	" 定义字典.
+  " 定义字典.
   let g:neocomplcache_dictionary_filetype_lists = {
       \ 'default' : '',
       \ 'vimshell' : $HOME.'/.vimshell_hist',
       \ 'scheme' : $HOME.'/.gosh_completions'
-         \ }
-
+	  \ }
+ 
   " 定义关键词.
   if !exists('g:neocomplcache_keyword_patterns')
       let g:neocomplcache_keyword_patterns = {}
@@ -575,6 +575,14 @@
   "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
   let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
   
+  " 兼容clang_complete
+  let g:neocomplcache_force_overwrite_completefunc = 1
+  let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+  let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+  let g:neocomplcache_omni_patterns.objc = '[^.[:digit:] *\t]\%(\.\|->\)'
+  let g:neocomplcache_omni_patterns.objcpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+  
+  
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " NeoSnippet
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -590,3 +598,15 @@
   if has('conceal')
     set conceallevel=2 concealcursor=i
   endif
+
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Clang_Complete
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  let g:clang_complete_copen = 1
+  let g:clang_periodic_quickfix = 1
+  let g:clang_snippets = 1
+  let g:clang_close_preview = 1
+  let g:clang_use_library = 1
+  let g:clang_complete_auto = 0
+  let g:clang_auto_select = 0
+  "let g:clang_user_options = '|| exit 0'
