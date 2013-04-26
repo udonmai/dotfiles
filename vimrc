@@ -81,6 +81,8 @@
   """"""""""""""""""""""""""""""
   Bundle 'udonmai/Conque-Shell'
   Bundle 'grep.vim'
+  
+  Bundle 'scrooloose/syntastic'
   Bundle 'vim-flake8'
 
   filetype plugin indent on     " required!
@@ -281,7 +283,6 @@
   au BufRead,BufNewFile *.js setf jquery
   
 
-
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " CTags的设定
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -332,14 +333,13 @@
   "let Tlist_WinHeight = 20
   let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 
-
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Autocommands
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " 只在下列文件类型被侦测到的时候显示行号，普通文本文件不显示
  
   if has("autocmd") 
-    autocmd FileType xml,html,css,js,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,markdown,sh,md set number
+    autocmd FileType xml,html,css,js,javascript,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,markdown,sh,md set number
     autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
     autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o
     autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python setlocal textwidth=100
@@ -499,7 +499,6 @@
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   let g:Powerline_symbols = 'fancy'  " 启用 smartcase.
 
-
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " NeoComplCache
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -583,7 +582,6 @@
   let g:neocomplcache_omni_patterns.objc = '[^.[:digit:] *\t]\%(\.\|->\)'
   let g:neocomplcache_omni_patterns.objcpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
   
-  
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " NeoSnippet
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -614,3 +612,17 @@
   
   " vim自身设置，不显示预览窗口
   set completeopt=menu 
+
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Clang_Complete
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_error_symbol = '✗'
+  let g:syntastic_warning_symbol = '⚠'
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_loc_list_height = 5
+  let g:syntastic_python_checkers=['pyflakes']
+  let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
+  "phpcs，tab 4个空格，编码参考使用CodeIgniter风格
+  let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
+
