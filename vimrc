@@ -31,13 +31,12 @@
   Bundle 'Markdown'
   Bundle 'Markdown-syntax'
   "Bundle 'php.vim-html-enhanced' "一个TAB为3个空格 = =
-  "Bundle 'css_color.vim' 
   "增加了rgb显示颜色和同行显示多处颜色
   Bundle 'skammer/vim-css-color'
 
   " UI
   """""""""""""""""""""""""""""""
-  Bundle 'winmanager'
+  "Bundle 'winmanager'
   Bundle 'scrooloose/nerdtree'
   Bundle 'scrooloose/nerdcommenter'
   Bundle 'taglist.vim'
@@ -82,7 +81,7 @@
   Bundle 'grep.vim'
   
   Bundle 'scrooloose/syntastic'
-  Bundle 'vim-flake8'
+  "Bundle 'vim-flake8'
 
   filetype plugin indent on     " required!
   "
@@ -398,14 +397,14 @@
   let g:miniBufExplMapCTabSwitchBufs = 1
   let g:miniBufExplModSelTarget = 1
 
-  " 设置配色
+  " 设置配色和CSApprox
   set t_Co=256
-	let g:CSApprox_attr_map={'bold':'bold','italic':'','sp':''}
+  let g:CSApprox_attr_map={'bold':'bold','italic':'','sp':''}
   "colo elise
 
   " 启用WinManager
-  let g:winManagerWindowLayout='FileExplorer'
-  nmap wm :WMToggle<cr>
+  "let g:winManagerWindowLayout='FileExplorer'
+  "nmap wm :WMToggle<cr>
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   "Cscope 
@@ -454,7 +453,7 @@
   nnoremap <silent> <F3> :Grep<CR>
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  "PHP Sp
+  " PHP Sp
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " php editing
   " remove CR at end of lines
@@ -464,20 +463,6 @@
   " Set maximum text width (for wrapping)
   set textwidth=110
 
-  " PHP syntax check
-  "function! PHP_CheckSyntax()
-  "setlocal makeprg=d:/apmxe/bin/php526/php.exe\ -l\ -n\ -d\ html_errors=off
-  "setlocal shellpipe=>
-  " Use error format for parsing PHP error output
-  "setlocal errorformat=%m\ in\ %f\ on\ line\ %l
-  "make %
-  "endfunction
-  " Perform :PHP_CheckSyntax()
-  "map <F5> :call PHP_CheckSyntax()<CR>
-
-  "配置路径
-  "set runtimepath +=$HOME/.vim/phpdoc
-
   "配置vimrc, 使得keywordprg=”help” 注：一般情况下，keywordprg默认是!man或!man -s
   autocmd BufNewFile,Bufread *.module,*.inc,*.php set keywordprg="help"
 
@@ -485,7 +470,7 @@
   autocmd! bufwritepost _vimrc source %
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  "Python sp
+  " Python sp
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   "pydiction 1.2 python auto complete
   "filetype plugin on
@@ -613,14 +598,14 @@
   set completeopt=menu 
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Clang_Complete
+  " Syntastic
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   let g:syntastic_check_on_open = 1
   let g:syntastic_error_symbol = '✗'
   let g:syntastic_warning_symbol = '⚠'
   let g:syntastic_auto_loc_list = 1
   let g:syntastic_loc_list_height = 5
-  let g:syntastic_python_checkers=['pyflakes']
+  let g:syntastic_python_checkers=['flake8']
   let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
   "phpcs，tab 4个空格，编码参考使用CodeIgniter风格
   let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
