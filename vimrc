@@ -23,6 +23,7 @@
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   "语法高亮
   """""""""""""""""""""""""""""""
+  Bundle 'molokai'
   Bundle 'JavaScript-syntax'
   Bundle 'jQuery'
   Bundle 'othree/html5.vim'
@@ -610,3 +611,6 @@
   let g:clang_complete_auto = 0
   let g:clang_auto_select = 0
   "let g:clang_user_options = '|| exit 0'
+  
+  " vim自身设置，不显示预览窗口
+  set completeopt=menu 
