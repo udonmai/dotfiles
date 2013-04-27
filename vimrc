@@ -69,9 +69,8 @@ Bundle 'Shougo/neosnippet'
 Bundle 'ZenCoding.vim'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-surround'
-"Bundle 'word_complete.vim'
-Bundle 'closetag.vim'
-" PHP 
+"Bundle 'Raimondi/delimitMate'
+Bundle 'Townk/vim-autoclose'
 " press K on a function for full PHP manual
 Bundle 'spf13/PIV'
 
@@ -287,12 +286,13 @@ au BufRead,BufNewFile *.js setf jquery
 " 只在下列文件类型被侦测到的时候显示行号，普通文本文件不显示
 
 if has("autocmd") 
+autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
 autocmd FileType xml,html,css,js,javascript,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,markdown,sh,md set number
 autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
 autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o
 autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python setlocal textwidth=100
-autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
-autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
+"autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
+"autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
 autocmd BufReadPost *
 \ if line("'\"") > 0 && line("'\"") <= line("$") |
 \ exe " normal g`\"" |
@@ -319,6 +319,38 @@ func! CompileRunGpp()
 exec "w"
 exec "!g++ % -o %<"
 exec "! ./%<"
+endfunc
+
+"map <F8> :w<CR>:call CompileRun()<CR> 
+"map <F8><F8> :w<CR>:call Debug()<CR>
+
+func CompileRun() 
+    exec “w”  
+    if &filetype == ‘c’  
+        exec “!gcc % -g -o %<” 
+        exec “!.\/%<” 
+    elseif &filetype ==’cpp’ 
+        exec “!g++ % -g -o %<” 
+        exec “!.\/%<” 
+    elseif &filetype == ‘python’ 
+        exec “!python %” 
+    endif 
+endfunc
+
+func Debug() 
+    exec “w”  
+    if &filetype == ‘c’  
+        exec “!rm %<” 
+        exec “!gcc % -g -o %<” 
+        exec “!gdb %<” 
+    elseif &filetype == ‘cpp’ 
+        exec “!rm %<” 
+        exec “!g++ % -g -o %<” 
+        exec “!gdb %<” 
+        exec “!rm %<.class” 
+    elseif &filetype == ‘python’ 
+        exec “!pdb %” 
+    endif 
 endfunc
 
 " 能够漂亮地显示.NFO文件
@@ -510,7 +542,7 @@ let g:neocomplcache_enable_camel_case_completion = 1
 " 启用下划线补全.
 let g:neocomplcache_enable_underbar_completion = 1
 " 设定最小语法关键词长度.
-let g:neocomplcache_min_syntax_length = 2 
+let g:neocomplcache_min_syntax_length = 1 
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 " 定义字典.
 let g:neocomplcache_dictionary_filetype_lists = {
@@ -643,3 +675,8 @@ let g:user_zen_expandabbr_key='<C-u>'
 "兼容大部分配色方案
 hi link EasyMotionTarget ErrorMsg
 hi link EasyMotionShade  Comment
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                AutoClose                 """""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:AutoClosePairs_add = "<>"
