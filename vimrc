@@ -4,7 +4,7 @@
 "endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                  Vundle					"""""""""""""""""""""
+"                  Vundle                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 " BundleInstall
@@ -360,7 +360,7 @@ let g:CSApprox_attr_map={'bold':'bold','italic':'','sp':''}
 "nmap wm :WMToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                  PHP Sp					"""""""""""""""""""""
+"                  PHP Sp                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " php editing
 " remove CR at end of lines
@@ -377,7 +377,7 @@ autocmd BufNewFile,Bufread *.module,*.inc,*.php set keywordprg="help"
 autocmd! bufwritepost _vimrc source %
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"               Python sp					"""""""""""""""""""""
+"               Python sp                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 "pydiction 1.2 python auto complete
 "filetype plugin on
@@ -386,7 +386,7 @@ autocmd! bufwritepost _vimrc source %
 "let g:pydiction_menu_height = 20 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                  CTags					"""""""""""""""""""""
+"                  CTags                    """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " 按照名称排序
 let Tlist_Sort_Type = "name"
@@ -406,7 +406,7 @@ set tags+=/usr/include/tags
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                 TagBar					"""""""""""""""""""""
+"                 TagBar                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <F9> :TagbarToggle<CR>   "设置快捷键
 let g:tarbar_ctags_bin = '/usr/local/bin/ctags'
@@ -416,7 +416,7 @@ let g:tagbar_width = 40       "设置宽度，默认为40
 let g:tagbar_right = 1 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                  Taglist					"""""""""""""""""""""
+"                  Taglist                 """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 let Tlist_Auto_Highlight_Tag = 1
 let Tlist_Auto_Open = 0 
@@ -444,7 +444,7 @@ let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 "map <silent> <F9> :TlistToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                  Cscope					"""""""""""""""""""""
+"                  Cscope                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 "设定是否使用 quickfix 窗口来显示 cscope 结果
 set cscopequickfix=s-,c-,d-,i-,t-,e- 
@@ -460,7 +460,7 @@ nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"             MiniBufExplorer				"""""""""""""""""""""
+"             MiniBufExplorer               """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 "<C-Tab>	向前循环切换到每个buffer上,并在但前窗口打开
 "<C-S-Tab>	向后循环切换到每个buffer上,并在但前窗口打开
@@ -474,7 +474,7 @@ let g:miniBufExplMapWindowNavArrows = 1
 "let g:miniBufExplMapWindowNavVim = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                 NerdTree					"""""""""""""""""""""
+"                 NerdTree                  """""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""" 
 "设置F10为开启快捷方式
 map <F10> :NERDTreeToggle<CR>
@@ -482,22 +482,22 @@ map <F10> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"               NerdCommenter				"""""""""""""""""""""
+"               NerdCommenter               """""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""" 
 let mapleader="," "修改<leader>的映射键为','
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                  Grep						"""""""""""""""""""""
+"                  Grep                     """""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""" 
 nnoremap <silent> <F3> :Grep<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"               Powerline					"""""""""""""""""""""
+"               Powerline                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 let g:Powerline_symbols = 'fancy'  " 启用 smartcase.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"             NeoComplCache					"""""""""""""""""""""
+"             NeoComplCache                 """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " 停用 AutoComplPop.
 "let g:acp_enableAtStartup = 0
@@ -580,7 +580,7 @@ let g:neocomplcache_omni_patterns.objc = '[^.[:digit:] *\t]\%(\.\|->\)'
 let g:neocomplcache_omni_patterns.objcpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                NeoSnippet					"""""""""""""""""""""
+"                NeoSnippet                """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 "Plugin key-mappings.
 imap <C-k>	 <Plug>(neosnippet_expand_or_jump)
@@ -596,7 +596,7 @@ set conceallevel=2 concealcursor=i
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"              Clang_Complete				"""""""""""""""""""""
+"              Clang_Complete              """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 let g:clang_complete_copen = 1
 let g:clang_periodic_quickfix = 1
@@ -633,12 +633,12 @@ let g:gundo_close_on_revert = 1
 let g:gundo_preview_bottom = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                ZenCoding					"""""""""""""""""""""
+"                ZenCoding                 """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 let g:user_zen_expandabbr_key='<C-u>'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                EasyMotion					"""""""""""""""""""""
+"                EasyMotion                """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 "兼容大部分配色方案
 hi link EasyMotionTarget ErrorMsg
