@@ -611,7 +611,7 @@ let g:clang_auto_select = 0
 set completeopt=menu 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"               Syntastic					"""""""""""""""""""""
+"               Syntastic                  """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_check_on_open = 1
 let g:syntastic_error_symbol = '✗'
@@ -624,7 +624,7 @@ let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
 let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                  Gundo					"""""""""""""""""""""
+"                  Gundo                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " f5 toggles the Gundo plugin window
 nnoremap <F5> :GundoToggle<CR>
