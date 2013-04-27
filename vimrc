@@ -3,9 +3,9 @@
 "  source /etc/vim/vimrc.local
 "endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                  Vundle					"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 " BundleInstall
 
@@ -20,7 +20,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My Bundle here:
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""
 " 语法高亮
 """""""""""""""""""""""""""""""
 Bundle 'molokai'
@@ -34,7 +34,7 @@ Bundle 'Markdown-syntax'
 "增加了rgb显示颜色和同行显示多处颜色
 Bundle 'skammer/vim-css-color'
 
-" UI
+" User Interface
 """""""""""""""""""""""""""""""
 "Bundle 'winmanager'
 Bundle 'scrooloose/nerdtree'
@@ -94,6 +94,7 @@ filetype plugin indent on     " required!
 "
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
+
 
 """"""""""""""""""""""""""""""Ace""""""""""""""""""""""""""""""""""""
 " 一般设定
@@ -303,6 +304,7 @@ endif "has("autocmd")
 " 需要去掉./这两个字符
 
 " C的编译和运行
+"""""""""""""""""""""""""""""""
 map <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
 exec "w"
@@ -311,6 +313,7 @@ exec "! ./%<"
 endfunc
 
 " C++的编译和运行
+"""""""""""""""""""""""""""""""
 map <F6> :call CompileRunGpp()<CR>
 func! CompileRunGpp()
 exec "w"
@@ -319,14 +322,15 @@ exec "! ./%<"
 endfunc
 
 " 能够漂亮地显示.NFO文件
+"""""""""""""""""""""""""""""""
 "set encoding=utf-8
 function! SetFileEncodings(encodings)
-let b:myfileencodingsbak=&fileencodings
-let &fileencodings=a:encodings
+	let b:myfileencodingsbak=&fileencodings
+	let &fileencodings=a:encodings
 endfunction
 function! RestoreFileEncodings()
-let &fileencodings=b:myfileencodingsbak
-unlet b:myfileencodingsbak
+	let &fileencodings=b:myfileencodingsbak
+	unlet b:myfileencodingsbak
 endfunction
 
 au BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single 
@@ -355,9 +359,35 @@ let g:CSApprox_attr_map={'bold':'bold','italic':'','sp':''}
 "let g:winManagerWindowLayout='FileExplorer'
 "nmap wm :WMToggle<cr>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CTags的设定
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                  PHP Sp					"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+" php editing
+" remove CR at end of lines
+let PHP_removeCRwhenUnix = 1
+" Set up automatic formatting
+set formatoptions+=tcqlro
+" Set maximum text width (for wrapping)
+set textwidth=110
+
+"配置vimrc, 使得keywordprg=”help” 注：一般情况下，keywordprg默认是!man或!man -s
+autocmd BufNewFile,Bufread *.module,*.inc,*.php set keywordprg="help"
+
+"autoload _vimrc
+autocmd! bufwritepost _vimrc source %
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"               Python sp					"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+"pydiction 1.2 python auto complete
+"filetype plugin on
+"let g:pydiction_location = '~/.vim/bundle/Pydiction'
+"defalut g:pydiction_menu_height == 15	
+"let g:pydiction_menu_height = 20 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                  CTags					"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 按照名称排序
 let Tlist_Sort_Type = "name"
 " 在右侧显示窗口
@@ -375,9 +405,9 @@ set tags+=/usr/include/tags
 " 设置环境变量
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TagBar
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                 TagBar					"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <F9> :TagbarToggle<CR>   "设置快捷键
 let g:tarbar_ctags_bin = '/usr/local/bin/ctags'
 let g:tagbar_width = 40       "设置宽度，默认为40
@@ -385,9 +415,9 @@ let g:tagbar_width = 40       "设置宽度，默认为40
 "let g:tagbar_left = 1         "在左侧
 let g:tagbar_right = 1 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Taglist
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                  Taglist					"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
 let Tlist_Auto_Highlight_Tag = 1
 let Tlist_Auto_Open = 0 
 let Tlist_Auto_Update = 1
@@ -413,9 +443,9 @@ let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 " 映射F9为开关键
 "map <silent> <F9> :TlistToggle<cr>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Cscope 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                  Cscope					"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
 "设定是否使用 quickfix 窗口来显示 cscope 结果
 set cscopequickfix=s-,c-,d-,i-,t-,e- 
 
@@ -429,9 +459,9 @@ nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MiniBufExplorer
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"             MiniBufExplorer				"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
 "<C-Tab>	向前循环切换到每个buffer上,并在但前窗口打开
 "<C-S-Tab>	向后循环切换到每个buffer上,并在但前窗口打开
 let g:miniBufExplMapCTabSwitchBufs = 1
@@ -443,58 +473,32 @@ let g:miniBufExplMapWindowNavArrows = 1
 "C-w,h j k l    向"左,下,上,右"切换窗口.
 "let g:miniBufExplMapWindowNavVim = 1
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NerdTree
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                 NerdTree					"""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""" 
 "设置F10为开启快捷方式
 map <F10> :NERDTreeToggle<CR>
 "关闭文件后只剩NerdTree的时候也一并关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NerdCommenter
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"               NerdCommenter				"""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""" 
 let mapleader="," "修改<leader>的映射键为','
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Grep F3-工程内查找
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                  Grep						"""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""" 
 nnoremap <silent> <F3> :Grep<CR>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PHP Sp
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" php editing
-" remove CR at end of lines
-let PHP_removeCRwhenUnix = 1
-" Set up automatic formatting
-set formatoptions+=tcqlro
-" Set maximum text width (for wrapping)
-set textwidth=110
-
-"配置vimrc, 使得keywordprg=”help” 注：一般情况下，keywordprg默认是!man或!man -s
-autocmd BufNewFile,Bufread *.module,*.inc,*.php set keywordprg="help"
-
-"autoload _vimrc
-autocmd! bufwritepost _vimrc source %
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Python sp
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"pydiction 1.2 python auto complete
-"filetype plugin on
-"let g:pydiction_location = '~/.vim/bundle/Pydiction'
-"defalut g:pydiction_menu_height == 15	
-"let g:pydiction_menu_height = 20 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Powerline
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"               Powerline					"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:Powerline_symbols = 'fancy'  " 启用 smartcase.
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NeoComplCache
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"             NeoComplCache					"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 停用 AutoComplPop.
 "let g:acp_enableAtStartup = 0
 " 启用 neocomplcache.
@@ -575,9 +579,9 @@ let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 let g:neocomplcache_omni_patterns.objc = '[^.[:digit:] *\t]\%(\.\|->\)'
 let g:neocomplcache_omni_patterns.objcpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NeoSnippet
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                NeoSnippet					"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Plugin key-mappings.
 imap <C-k>	 <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -591,9 +595,9 @@ if has('conceal')
 set conceallevel=2 concealcursor=i
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Clang_Complete
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"              Clang_Complete				"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:clang_complete_copen = 1
 let g:clang_periodic_quickfix = 1
 let g:clang_snippets = 1
@@ -606,9 +610,9 @@ let g:clang_auto_select = 0
 " vim自身设置，不显示预览窗口
 set completeopt=menu 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              Syntastic
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"               Syntastic					"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_check_on_open = 1
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
@@ -620,8 +624,8 @@ let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
 let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                 Gundo                                   "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                  Gundo					"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
 " f5 toggles the Gundo plugin window
 nnoremap <F5> :GundoToggle<CR>
 let g:gundo_width = 25
@@ -629,12 +633,13 @@ let g:gundo_close_on_revert = 1
 let g:gundo_preview_bottom = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               ZenCoding                                 "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                ZenCoding					"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:user_zen_expandabbr_key='<C-u>'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              EasyMotion                                 "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                EasyMotion					"""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+"兼容大部分配色方案
 hi link EasyMotionTarget ErrorMsg
 hi link EasyMotionShade  Comment
