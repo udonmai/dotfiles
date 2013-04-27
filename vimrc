@@ -80,7 +80,9 @@ Bundle 'udonmai/Conque-Shell'
 Bundle 'grep.vim'
 
 Bundle 'scrooloose/syntastic'
+Bundle 'YankRing.vim'
 Bundle 'sjl/gundo.vim'
+Bundle 'wincent/Command-T'
 "Bundle 'vim-flake8'
 
 filetype plugin indent on     " required!
@@ -391,6 +393,11 @@ let g:CSApprox_attr_map={'bold':'bold','italic':'','sp':''}
 "let g:winManagerWindowLayout='FileExplorer'
 "nmap wm :WMToggle<cr>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                  键映射                 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+inoremap jj <ESC>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                  PHP Sp                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -680,3 +687,24 @@ hi link EasyMotionShade  Comment
 "                AutoClose                 """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 let g:AutoClosePairs_add = "<>"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                YankRing                  """""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:yankring_history_dir = '$HOME/tmp/vim'
+" this is so that single char deletes don't end up in the yankring
+let g:yankring_min_element_length = 2
+let g:yankring_window_height = 14
+nnoremap <leader>r :YRShow<CR>
+"
+"this makes Y yank from the cursor to the end of the line, which makes more
+"sense than the default of yanking the whole current line (we can use yy for
+"that)
+function! YRRunAfterMaps()
+    nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                          """""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
