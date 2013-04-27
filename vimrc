@@ -39,7 +39,8 @@
   "Bundle 'winmanager'
   Bundle 'scrooloose/nerdtree'
   Bundle 'scrooloose/nerdcommenter'
-  Bundle 'taglist.vim'
+  "Bundle 'taglist.vim'
+  Bundle 'majutsushi/tagbar'
   Bundle 'fholgado/minibufexpl.vim'
   "Bundle 'bufexplorer.zip'
   Bundle 'Lokaltog/vim-powerline'
@@ -272,64 +273,12 @@
   " 在行和段开始处使用制表符
   set smarttab
 
-
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " 补充
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " JavaScript 语法高亮
   au FileType html,javascript let g:javascript_enable_domhtmlcss = 1
   au BufRead,BufNewFile *.js setf jquery
-  
-
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " CTags的设定
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " 按照名称排序
-  let Tlist_Sort_Type = "name"
- 
-  " 在右侧显示窗口
-  let Tlist_Use_Right_Window = 0
- 
-  " 压缩方式
-  let Tlist_Compart_Format = 1
- 
-  " 如果只有一个buffer，kill窗口也kill掉buffer
-  let Tlist_Exist_OnlyWindow = 1
- 
-  " 不要关闭其他文件的tags
-  let Tlist_File_Fold_Auto_Close = 0
- 
-  " 不要显示折叠树
-  let Tlist_Enable_Fold_Column = 0
-
-  " 设置全局tags
-  set tags+=/usr/include/tags
-
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Taglist
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  let Tlist_Auto_Highlight_Tag = 1
-  let Tlist_Auto_Open = 1
-  let Tlist_Auto_Update = 1
-  let Tlist_Close_On_Select = 0
-  let Tlist_Compact_Format = 0
-  let Tlist_Display_Prototype = 0
-  let Tlist_File_Fold_Auto_Close = 1
-  let Tlist_GainFocus_On_ToggleOpen = 0"开启vim后焦点在taglist上
-  let Tlist_Hightlight_Tag_On_BufEnter = 1
-  let Tlist_Inc_Winwidth = 0
-  let Tlist_Exit_OnlyWindow = 1 
-  let Tlist_Max_Submenu_Items = 1
-  let Tlist_Max_Tag_Length = 30
-  let Tlist_Process_File_Always = 0
-  let Tlist_Show_Menu = 1
-  let Tlist_Show_One_File = 0
-  let Tlist_Sort_Type = "order"
-  let Tlist_Use_Horiz_Window = 0
-  let Tlist_Use_Right_Window = 1
-  let Tlist_WinWidth = 30
-  "let Tlist_WinHeight = 20
-  let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Autocommands
@@ -405,6 +354,64 @@
   " 启用WinManager
   "let g:winManagerWindowLayout='FileExplorer'
   "nmap wm :WMToggle<cr>
+
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " CTags的设定
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " 按照名称排序
+  let Tlist_Sort_Type = "name"
+  " 在右侧显示窗口
+  let Tlist_Use_Right_Window = 0
+  " 压缩方式
+  let Tlist_Compart_Format = 1
+  " 如果只有一个buffer，kill窗口也kill掉buffer
+  let Tlist_Exist_OnlyWindow = 1
+  " 不要关闭其他文件的tags
+  let Tlist_File_Fold_Auto_Close = 0
+  " 不要显示折叠树
+  let Tlist_Enable_Fold_Column = 0
+  " 设置全局tags
+  set tags+=/usr/include/tags
+  " 设置环境变量
+  let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " TagBar
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  nmap <F9> :TagbarToggle<CR>   "设置快捷键
+  let g:tarbar_ctags_bin = '/usr/local/bin/ctags'
+  let g:tagbar_width = 40       "设置宽度，默认为40
+  "autocmd VimEnter * nested :call tagbar#autoopen(1)    "打开vim时自动打开tagbar
+  "let g:tagbar_left = 1         "在左侧
+  let g:tagbar_right = 1 
+
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Taglist
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  let Tlist_Auto_Highlight_Tag = 1
+  let Tlist_Auto_Open = 0 
+  let Tlist_Auto_Update = 1
+  let Tlist_Close_On_Select = 0
+  let Tlist_Compact_Format = 0
+  let Tlist_Display_Prototype = 0
+  let Tlist_File_Fold_Auto_Close = 1
+  let Tlist_GainFocus_On_ToggleOpen = 0"开启vim后焦点在taglist上
+  let Tlist_Hightlight_Tag_On_BufEnter = 1
+  let Tlist_Inc_Winwidth = 0
+  let Tlist_Exit_OnlyWindow = 1 
+  let Tlist_Max_Submenu_Items = 1
+  let Tlist_Max_Tag_Length = 30
+  let Tlist_Process_File_Always = 0
+  let Tlist_Show_Menu = 1
+  let Tlist_Show_One_File = 0
+  let Tlist_Sort_Type = "order"
+  let Tlist_Use_Horiz_Window = 0
+  let Tlist_Use_Right_Window = 1
+  let Tlist_WinWidth = 30
+  "let Tlist_WinHeight = 20
+  let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
+  " 映射F9为开关键
+  "map <silent> <F9> :TlistToggle<cr>
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   "Cscope 
