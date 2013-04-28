@@ -28,6 +28,7 @@ Bundle 'JavaScript-syntax'
 Bundle 'jQuery'
 Bundle 'othree/html5.vim'
 Bundle 'groenewege/vim-less'
+Bundle 'hail2u/vim-css3-syntax'
 Bundle 'Markdown'
 Bundle 'Markdown-syntax'
 "Bundle 'php.vim-html-enhanced' "一个TAB为3个空格 = =
@@ -56,7 +57,8 @@ Bundle 'CSApprox'
 Bundle 'Rip-Rip/clang_complete'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/neosnippet'
-
+Bundle 'honza/vim-snippets'
+Bundle 'davidhalter/jedi-vim'
 "Bundle 'Valloric/YouCompleteMe'
 
 " support for snipmate 
@@ -71,6 +73,7 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-surround'
 "Bundle 'Raimondi/delimitMate'
 Bundle 'Townk/vim-autoclose'
+Bundle 'matchit.zip'
 " press K on a function for full PHP manual
 Bundle 'spf13/PIV'
 
@@ -120,7 +123,7 @@ set fencs=utf-8,gbk,gb2312,gb18030,cp936,usc-bom,euc-jp
 set nocompatible
 
 " history文件中需要记录的行数
-set history=100
+set history=600
 
 " 在处理未保存或只读文件的时候，弹出确认
 set confirm
@@ -145,7 +148,6 @@ set iskeyword+=_,$,@,%,#,-
 
 " 语法高亮
 syntax on
-"source $HOME/.vim/syntax/php.vim
 
 " 显示行号(下面有自动侦测文件类型显示)
 "set nu
@@ -276,7 +278,7 @@ set nowrap
 set smarttab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 补充
+" js补充
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " JavaScript 语法高亮
 au FileType html,javascript let g:javascript_enable_domhtmlcss = 1
@@ -408,12 +410,14 @@ let PHP_removeCRwhenUnix = 1
 set formatoptions+=tcqlro
 " Set maximum text width (for wrapping)
 set textwidth=110
-
 "配置vimrc, 使得keywordprg=”help” 注：一般情况下，keywordprg默认是!man或!man -s
 autocmd BufNewFile,Bufread *.module,*.inc,*.php set keywordprg="help"
-
 "autoload _vimrc
-autocmd! bufwritepost _vimrc source %
+"autocmd! bufwritepost _vimrc source %
+
+" PIV
+let g:DisableAutoPHPFolding = 1
+let php_folding=0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "               Python sp                   """""""""""""""""""""
@@ -439,8 +443,8 @@ let Tlist_Exist_OnlyWindow = 1
 let Tlist_File_Fold_Auto_Close = 0
 " 不要显示折叠树
 let Tlist_Enable_Fold_Column = 0
-" 设置全局tags
-set tags+=/usr/include/tags
+" 设置tags
+set tags+=~/tmp/vim/tags
 " 设置环境变量
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 
@@ -549,14 +553,20 @@ let g:neocomplcache_enable_camel_case_completion = 1
 " 启用下划线补全.
 let g:neocomplcache_enable_underbar_completion = 1
 " 设定最小语法关键词长度.
-let g:neocomplcache_min_syntax_length = 1 
+let g:neocomplcache_min_syntax_length = 2 
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 " 定义字典.
 let g:neocomplcache_dictionary_filetype_lists = {
-\ 'default' : '',
-\ 'vimshell' : $HOME.'/.vimshell_hist',
-\ 'scheme' : $HOME.'/.gosh_completions'
-\ }
+	\ 'default' : '',
+	\ 'vimshell' : $HOME.'/.vimshell_hist',
+	\ 'scheme' : $HOME.'/.gosh_completions'
+	\ }
+"	\ 'css' : $HOME.'.vim/dict/css.dic',
+"	\ 'php' : $HOME.'.vim/dict/php.dic',
+"	\ 'javascript' : $HOME.'.vim/dict/javascript.dic'
+
+"include_complete be abled
+let g:neocomplcache_ctags_program = '/usr/local/bin/ctags'
 
 " 定义关键词.
 if !exists('g:neocomplcache_keyword_patterns')
@@ -602,37 +612,65 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 
 " 启用 heavy omni 补全.
 if !exists('g:neocomplcache_omni_patterns')
-let g:neocomplcache_omni_patterns = {}
+	let g:neocomplcache_omni_patterns = {}
 endif
+if !exists('g:neocomplcache_omni_functions')
+	let g:neocomplcache_omni_functions = {}
+endif
+if !exists('g:neocomplcache_force_omni_patterns')
+	let g:neocomplcache_force_omni_patterns = {}
+endif
+
 "let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+
+let g:neocomplcache_omni_functions.python = 'jedi#complete'
 
 " 兼容clang_complete
 let g:neocomplcache_force_overwrite_completefunc = 1
-let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-let g:neocomplcache_omni_patterns.objc = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplcache_omni_patterns.objcpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplcache_force_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplcache_force_omni_patterns.objc = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplcache_force_omni_patterns.objcpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+let g:neocomplcache_force_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+
+" rank sourch list
+let g:neocomplcache_source_rank = {
+	\ 'buffer_complete'     : 6,
+	\ 'dictionary_complete' : 5,
+	\ 'syntax_complete'     : 4,
+	\ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                NeoSnippet                """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 "Plugin key-mappings.
-imap <C-k>	 <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+imap <C-k>	<Plug>(neosnippet_expand_or_jump)
+smap <C-k>	<Plug>(neosnippet_expand_or_jump)
+xmap <C-k>	<Plug>(neosnippet_expand_target)
 
 "SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+"smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
 
 "For snippet_complete marker.
 if has('conceal')
-set conceallevel=2 concealcursor=i
+	set conceallevel=2 concealcursor=i
 endif
+
+" Tell Neosnippet about the other snippets
+" let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "              Clang_Complete              """""""""""""""""""""
@@ -647,7 +685,7 @@ let g:clang_auto_select = 0
 "let g:clang_user_options = '|| exit 0'
 
 " vim自身设置，不显示预览窗口
-set completeopt=menu 
+set completeopt=longest,menu 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "               Syntastic                  """""""""""""""""""""
@@ -665,8 +703,8 @@ let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                  Gundo                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
-" f5 toggles the Gundo plugin window
-nnoremap <F5> :GundoToggle<CR>
+" f8 toggles the Gundo plugin window
+nnoremap <F8> :GundoToggle<CR>
 let g:gundo_width = 25
 let g:gundo_close_on_revert = 1
 let g:gundo_preview_bottom = 1
@@ -708,7 +746,7 @@ endfunction
 "               Command-T                  """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 let g:CommandTMaxHeight          = 30
-let g:CommandTMatchWindowReverse = 1 " shows results in reverse order
+let g:CommandTMatchWindowReverse = 0 " shows results in reverse order
 
 " MacVim doesn't use tab focus to switch from command-t input field to the file
 " list, so using j and k for next and prev screws everything up. But it does
@@ -722,3 +760,10 @@ set wildignore+=*.o,*.obj,.git,*.pyc,*.so,blaze*,READONLY,llvm,Library*,CMakeFil
 nnoremap <leader>t :CommandT<cr>
 nnoremap <leader>n :CommandTBuffer<cr>
 nnoremap <leader>' :CommandTFlush<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"               jedi                       """"""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:jedi#popup_on_dot = 0
+
