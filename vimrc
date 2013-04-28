@@ -447,7 +447,7 @@ let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                 TagBar                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <F9> :TagbarToggle<CR>   "设置快捷键
+nmap <F10> :TagbarToggle<CR>   "设置快捷键
 let g:tarbar_ctags_bin = '/usr/local/bin/ctags'
 let g:tagbar_width = 40       "设置宽度，默认为40
 "autocmd VimEnter * nested :call tagbar#autoopen(1)    "打开vim时自动打开tagbar
@@ -515,8 +515,8 @@ let g:miniBufExplMapWindowNavArrows = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                 NerdTree                  """""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""" 
-"设置F10为开启快捷方式
-map <F10> :NERDTreeToggle<CR>
+"设置F9为开启快捷方式
+map <F9> :NERDTreeToggle<CR>
 "关闭文件后只剩NerdTree的时候也一并关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
@@ -705,6 +705,20 @@ function! YRRunAfterMaps()
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                          """""""""""""""""""""
+"               Command-T                  """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
+let g:CommandTMaxHeight          = 30
+let g:CommandTMatchWindowReverse = 1 " shows results in reverse order
 
+" MacVim doesn't use tab focus to switch from command-t input field to the file
+" list, so using j and k for next and prev screws everything up. But it does
+" work on linux so let's use it there.
+if has("gui_gtk2")
+	let g:commandtselectnextmap  = [ '<down>' ]
+	let g:commandtselectprevmap  = [ '<up>' ]
+endif
+
+set wildignore+=*.o,*.obj,.git,*.pyc,*.so,blaze*,READONLY,llvm,Library*,CMakeFiles
+nnoremap <leader>t :CommandT<cr>
+nnoremap <leader>n :CommandTBuffer<cr>
+nnoremap <leader>' :CommandTFlush<cr>
