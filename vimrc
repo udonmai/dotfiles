@@ -88,6 +88,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'YankRing.vim'
 Bundle 'sjl/gundo.vim'
 Bundle 'wincent/Command-T'
+Bundle 'derekwyatt/vim-fswitch'
 "Bundle 'vim-flake8'
 
 filetype plugin indent on     " required!
@@ -397,6 +398,14 @@ set t_Co=256
 let g:CSApprox_attr_map={'bold':'bold','italic':'','sp':''}
 "colo elise
 
+" 纵向线
+augroup cch
+	autocmd! cch
+	autocmd WinLeave * set nocursorline
+	autocmd WinLeave * set nocursorcolumn
+	autocmd WinEnter,BufRead * set cursorline
+	autocmd WinEnter,BufRead * set cursorcolumn
+augroup END
 " 启用WinManager
 "let g:winManagerWindowLayout='FileExplorer'
 "nmap wm :WMToggle<cr>
@@ -405,6 +414,7 @@ let g:CSApprox_attr_map={'bold':'bold','italic':'','sp':''}
 "                  键映射                 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 inoremap jj <ESC>
+noremap <Leader>q :qa<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                  PHP Sp                   """""""""""""""""""""
@@ -435,7 +445,7 @@ autocmd BufNewFile,Bufread *.module,*.inc,*.php set keywordprg="help"
 "let g:pydiction_menu_height = 20 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                 TagBar                   """""""""""""""""""""
+"                 TagBar                    """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <F10> :TagbarToggle<CR>   "设置快捷键
 let g:tarbar_ctags_bin = '/usr/local/bin/ctags'
@@ -741,7 +751,23 @@ nnoremap <silent><leader>nh :let b:easytags_auto_highlight = 0<CR>
 
 let g:easytags_resolve_links = 1
 " 分语言并汇总
-let g:easytags_by_filetype = '~/.vim/tags/'
+let g:easytags_by_filetype = '~/.vim/tags'
 " 递归遍历目录
 let g:easytags_autorecurse = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"             EasyTags                     """"""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+" A "companion" file is a .cpp file to an .h file and vice versa
+
+" Opens the companion file in the current window
+nnoremap <Leader>sh :FSHere<cr>
+" Opens the companion file in the window to the left (window needs to exist)
+" This is actually a duplicate of the :FSLeft command which for some reason
+" doesn't work.
+nnoremap <Leader>sl :call FSwitch('%', 'wincmd l')<cr>
+" Same as above, only opens it in window to the right
+nnoremap <Leader>sr :call FSwitch('%', 'wincmd r')<cr>
+" Creates a new window on the left and opens the companion file in it
+nnoremap <Leader>sv :FSSplitLeft<cr>
 
