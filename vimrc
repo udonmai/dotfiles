@@ -521,16 +521,17 @@ let g:neocomplcache_enable_camel_case_completion = 1
 " 启用下划线补全.
 let g:neocomplcache_enable_underbar_completion = 1
 " 设定最小语法关键词长度.
-let g:neocomplcache_min_syntax_length = 2 
+let g:neocomplcache_min_syntax_length = 2
+
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 " 定义字典.
 let g:neocomplcache_dictionary_filetype_lists = {
 	\ 'default' : '',
 	\ 'vimshell' : $HOME.'/.vimshell_hist',
-	\ 'scheme' : $HOME.'/.gosh_completions'
+	\ 'scheme' : $HOME.'/.gosh_completions',
+	\ 'php' : $HOME.'/.vim/dict/php.dic',
 	\ }
 "	\ 'css' : $HOME.'.vim/dict/css.dic',
-"	\ 'php' : $HOME.'.vim/dict/php.dic',
 "	\ 'javascript' : $HOME.'.vim/dict/javascript.dic'
 
 "include_complete be abled
@@ -603,6 +604,7 @@ let g:neocomplcache_force_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 let g:neocomplcache_force_omni_patterns.objc = '[^.[:digit:] *\t]\%(\.\|->\)'
 let g:neocomplcache_force_omni_patterns.objcpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
 
 let g:neocomplcache_omni_functions.python = 'jedi#complete'
 
@@ -652,7 +654,7 @@ let g:clang_auto_select = 0
 "let g:clang_user_options = '|| exit 0'
 
 " vim自身设置，不显示预览窗口
-set completeopt=longest,menuone 
+set completeopt=menuone 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "               Syntastic                  """""""""""""""""""""
@@ -739,6 +741,8 @@ let g:jedi#popup_on_dot = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " 给每个目录单独建tag文件
 set tags=./.tags;,~/.vim/tags
+autocmd FileType php :set tags+=~/.vim/tags/php
+
 let g:easytags_cmd = '/usr/local/bin/ctags'
 
 let g:easytags_file = '~/.vim/tags/tags'
