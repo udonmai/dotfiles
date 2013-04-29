@@ -3,6 +3,9 @@
 "  source /etc/vim/vimrc.local
 "endif
 
+""""" """ " Love your Life, please " """ """""
+        """"""""" """  """ """""""""
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                  Vundle                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -286,29 +289,29 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " js补充
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" JavaScript 语法高亮
-au FileType html,javascript let g:javascript_enable_domhtmlcss = 1
-au BufRead,BufNewFile *.js setf jquery
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 只在下列文件类型被侦测到的时候显示行号，普通文本文件不显示
-
 if has("autocmd") 
-autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
-autocmd FileType xml,html,css,js,javascript,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,markdown,sh,md set number
-autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
-autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o
-autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python setlocal textwidth=100
-"autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
-"autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
-autocmd BufReadPost *
-\ if line("'\"") > 0 && line("'\"") <= line("$") |
-\ exe " normal g`\"" |
-\ endif
-endif "has("autocmd")
+	autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
+	autocmd FileType xml,html,css,js,javascript,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,markdown,sh,md set number
+	autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
+	autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o
+	autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python setlocal textwidth=100
+	"autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
+	"autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
+
+	" JavaScript 语法高亮
+	au FileType html,javascript let g:javascript_enable_domhtmlcss = 1
+	au BufRead,BufNewFile *.js setf jquery
+	
+	autocmd BufReadPost *
+	\ if line("'\"") > 0 && line("'\"") <= line("$") |
+		\ exe " normal g`\"" |
+	\ endif
+endif "has("autocmd")"
 
 " F5编译和运行C程序，F6编译和运行C++程序
 " 请注意，下述代码在windows下使用会报错
@@ -406,12 +409,13 @@ augroup cch
 	autocmd WinEnter,BufRead * set cursorline
 	autocmd WinEnter,BufRead * set cursorcolumn
 augroup END
+
 " 启用WinManager
 "let g:winManagerWindowLayout='FileExplorer'
 "nmap wm :WMToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                  键映射                 
+"                  键映射
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 inoremap jj <ESC>
 noremap <Leader>q :qa<cr>
@@ -732,12 +736,12 @@ nnoremap <leader>' :CommandTFlush<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"               jedi                       """"""""""""""""""""
+"                 jedi                     """"""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 let g:jedi#popup_on_dot = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"             EasyTags                     """"""""""""""""""""
+"               EasyTags                   """"""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " 给每个目录单独建tag文件
 set tags=./.tags;,~/.vim/tags
@@ -760,7 +764,7 @@ let g:easytags_by_filetype = '~/.vim/tags'
 let g:easytags_autorecurse = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"             EasyTags                     """"""""""""""""""""
+"               FSwitch                    """"""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " A "companion" file is a .cpp file to an .h file and vice versa
 
