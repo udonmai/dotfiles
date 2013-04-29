@@ -2,8 +2,6 @@ import sys
 import os
 
 str.__rmul__
-
-'lo:q
-
+os.path.abspath('d')
 
 print type(sys.stdout)
