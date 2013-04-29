@@ -40,6 +40,7 @@ Bundle 'skammer/vim-css-color'
 "Bundle 'winmanager'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'xolox/vim-easytags'
 "Bundle 'taglist.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'fholgado/minibufexpl.vim'
@@ -75,7 +76,8 @@ Bundle 'tpope/vim-surround'
 Bundle 'Townk/vim-autoclose'
 Bundle 'matchit.zip'
 " press K on a function for full PHP manual
-Bundle 'spf13/PIV'
+"Bundle 'spf13/PIV'
+Bundle 'shawncplus/phpcomplete.vim'
 
 " Tools
 """"""""""""""""""""""""""""""
@@ -231,9 +233,6 @@ set ignorecase
 " 在搜索时，输入的词句的逐字符高亮（类似firefox的搜索）
 set incsearch
 
-" 输入:set list命令是应该显示些什么？
-set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$
-
 " 光标移动到buffer的顶部和底部时保持3行距离
 set scrolloff=3
 
@@ -276,6 +275,13 @@ set nowrap
 
 " 在行和段开始处使用制表符
 set smarttab
+
+" 显示空白
+set list
+" 输入:set list命令是应该显示些什么？
+set listchars=tab:>.,trail:.,extends:#,nbsp:.
+"set listchars=tab:▸\ ,eol:¬
+"set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " js补充
@@ -416,8 +422,8 @@ autocmd BufNewFile,Bufread *.module,*.inc,*.php set keywordprg="help"
 "autocmd! bufwritepost _vimrc source %
 
 " PIV
-let g:DisableAutoPHPFolding = 1
-let php_folding=0
+"let g:DisableAutoPHPFolding = 1
+"let php_folding=0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "               Python sp                   """""""""""""""""""""
@@ -429,26 +435,6 @@ let php_folding=0
 "let g:pydiction_menu_height = 20 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                  CTags                    """""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 按照名称排序
-let Tlist_Sort_Type = "name"
-" 在右侧显示窗口
-let Tlist_Use_Right_Window = 0
-" 压缩方式
-let Tlist_Compart_Format = 1
-" 如果只有一个buffer，kill窗口也kill掉buffer
-let Tlist_Exist_OnlyWindow = 1
-" 不要关闭其他文件的tags
-let Tlist_File_Fold_Auto_Close = 0
-" 不要显示折叠树
-let Tlist_Enable_Fold_Column = 0
-" 设置tags
-set tags+=~/tmp/vim/tags
-" 设置环境变量
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                 TagBar                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <F10> :TagbarToggle<CR>   "设置快捷键
@@ -457,34 +443,6 @@ let g:tagbar_width = 40       "设置宽度，默认为40
 "autocmd VimEnter * nested :call tagbar#autoopen(1)    "打开vim时自动打开tagbar
 "let g:tagbar_left = 1         "在左侧
 let g:tagbar_right = 1 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                  Taglist                 """""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""""""""""""
-let Tlist_Auto_Highlight_Tag = 1
-let Tlist_Auto_Open = 0 
-let Tlist_Auto_Update = 1
-let Tlist_Close_On_Select = 0
-let Tlist_Compact_Format = 0
-let Tlist_Display_Prototype = 0
-let Tlist_File_Fold_Auto_Close = 1
-let Tlist_GainFocus_On_ToggleOpen = 0"开启vim后焦点在taglist上
-let Tlist_Hightlight_Tag_On_BufEnter = 1
-let Tlist_Inc_Winwidth = 0
-let Tlist_Exit_OnlyWindow = 1 
-let Tlist_Max_Submenu_Items = 1
-let Tlist_Max_Tag_Length = 30
-let Tlist_Process_File_Always = 0
-let Tlist_Show_Menu = 1
-let Tlist_Show_One_File = 0
-let Tlist_Sort_Type = "order"
-let Tlist_Use_Horiz_Window = 0
-let Tlist_Use_Right_Window = 1
-let Tlist_WinWidth = 30
-"let Tlist_WinHeight = 20
-let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
-" 映射F9为开关键
-"map <silent> <F9> :TlistToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                  Cscope                   """""""""""""""""""""
@@ -612,7 +570,8 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+"autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP "vim默认
+"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
 " 启用 heavy omni 补全.
 if !exists('g:neocomplcache_omni_patterns')
@@ -626,9 +585,7 @@ if !exists('g:neocomplcache_force_omni_patterns')
 endif
 
 "let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-
-let g:neocomplcache_omni_functions.python = 'jedi#complete'
+"let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
 " 兼容clang_complete
 let g:neocomplcache_force_overwrite_completefunc = 1
@@ -637,7 +594,7 @@ let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\
 let g:neocomplcache_force_omni_patterns.objc = '[^.[:digit:] *\t]\%(\.\|->\)'
 let g:neocomplcache_force_omni_patterns.objcpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
-let g:neocomplcache_force_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplcache_omni_functions.python = 'jedi#complete'
 
 " rank sourch list
 let g:neocomplcache_source_rank = {
@@ -685,7 +642,7 @@ let g:clang_auto_select = 0
 "let g:clang_user_options = '|| exit 0'
 
 " vim自身设置，不显示预览窗口
-set completeopt=longest,menu 
+set completeopt=longest,menuone 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "               Syntastic                  """""""""""""""""""""
@@ -729,7 +686,7 @@ let g:AutoClosePairs_add = "<>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                YankRing                  """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
-let g:yankring_history_dir = '$HOME/tmp/vim'
+let g:yankring_history_dir = '~/.vim/yankring'
 " this is so that single char deletes don't end up in the yankring
 let g:yankring_min_element_length = 2
 let g:yankring_window_height = 14
@@ -766,4 +723,25 @@ nnoremap <leader>' :CommandTFlush<cr>
 "               jedi                       """"""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 let g:jedi#popup_on_dot = 0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"             EasyTags                     """"""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 给每个目录单独建tag文件
+set tags=./.tags;,~/.vim/tags
+let g:easytags_cmd = '/usr/local/bin/ctags'
+
+let g:easytags_file = '~/.vim/tags/tags'
+"let g:easytags_dynamic_files = 1
+
+nnoremap <leader>ut :UpdateTags!<CR>
+nnoremap <leader>ht :HighlightTags<CR>
+nnoremap <silent><leader>hh :let b:easytags_auto_highlight = 1<CR>
+nnoremap <silent><leader>nh :let b:easytags_auto_highlight = 0<CR>
+
+let g:easytags_resolve_links = 1
+" 分语言并汇总
+let g:easytags_by_filetype = '~/.vim/tags/'
+" 递归遍历目录
+let g:easytags_autorecurse = 1
 
