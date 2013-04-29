@@ -1,10 +1,11 @@
-" Source a global configuration file if available
-"if filereadable("/etc/vim/vimrc.local")
-"  source /etc/vim/vimrc.local
-"endif
 
 """"" """ " Love your Life, please " """ """""
-        """"""""" """  """ """""""""
+        """"""""" """ " """ """""""""
+		
+" Source a global configuration file if available
+"if filereadable("/etc/vim/vimrc.local")
+"	source /etc/vim/vimrc.local
+"endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                  Vundle                   """""""""""""""""""""
@@ -280,12 +281,14 @@ set nowrap
 " 在行和段开始处使用制表符
 set smarttab
 
-" 显示空白
+" 显示Tab和结尾
 set list
-" 输入:set list命令是应该显示些什么？
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 "set listchars=tab:▸\ ,eol:¬
 "set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$
+
+" vim自身设置，不显示预览窗口
+set completeopt=menuone 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " autocommands
@@ -649,9 +652,6 @@ let g:clang_use_library = 1
 let g:clang_complete_auto = 0
 let g:clang_auto_select = 0
 "let g:clang_user_options = '|| exit 0'
-
-" vim自身设置，不显示预览窗口
-set completeopt=menuone 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "               Syntastic                  """""""""""""""""""""
