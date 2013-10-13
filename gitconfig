@@ -2,7 +2,7 @@
 	name = udonmai
 	email = udonmai@gmail.com
 [credential]
-	helper = osxkeychains
+	helper = osxkeychain
 [alias]
 	co = checkout
 	ci = commit

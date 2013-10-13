@@ -319,6 +319,12 @@ endif "has("autocmd")"
 inoremap jj <ESC>
 noremap <Leader>q :qa<cr>
 
+" 分屏间移动
+map <C-J> <C-W>j
+map <C-K> <C-W>k
+map <C-H> <C-W>h
+map <C-L> <C-W>l
+
 " F5编译和运行C程序，F6编译和运行C++程序
 " 请注意，下述代码在windows下使用会报错
 " 需要去掉./这两个字符
@@ -740,9 +746,7 @@ let g:jedi#popup_on_dot = 0
 " 给每个目录单独建tag文件
 set tags=./.tags;,~/.vim/tags
 autocmd FileType php :set tags+=~/.vim/tags/php
-
 let g:easytags_cmd = '/usr/local/bin/ctags'
-
 let g:easytags_file = '~/.vim/tags/tags'
 "let g:easytags_dynamic_files = 1
 
@@ -753,9 +757,9 @@ nnoremap <silent><leader>nh :let b:easytags_auto_highlight = 0<CR>
 
 let g:easytags_resolve_links = 1
 " 分语言并汇总
-let g:easytags_by_filetype = '~/.vim/tags'
-" 递归遍历目录
-let g:easytags_autorecurse = 1
+"let g:easytags_by_filetype = '~/.vim/tags'
+" 递归遍历目录 - vim会停滞不动
+"let g:easytags_autorecurse = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "               FSwitch                    """"""""""""""""""""

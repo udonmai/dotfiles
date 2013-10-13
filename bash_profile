@@ -6,3 +6,5 @@ fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export PATH="$PATH:/usr/local/bin/node:/usr/local/bin/npm:/usr/local/share/npm/bin"
+
+#export http_proxy=127.0.0.1:8087
