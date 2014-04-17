@@ -38,6 +38,7 @@ Bundle 'Markdown-syntax'
 "Bundle 'php.vim-html-enhanced' "一个TAB为3个空格 = =
 "增加了rgb显示颜色和同行显示多处颜色
 Bundle 'skammer/vim-css-color'
+Bundle 'Valloric/vim-operator-highlight'
 
 " User Interface
 """""""""""""""""""""""""""""""
@@ -45,6 +46,7 @@ Bundle 'skammer/vim-css-color'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'xolox/vim-easytags'
+Bundle 'xolox/vim-misc'
 "Bundle 'taglist.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'fholgado/minibufexpl.vim'
@@ -62,6 +64,7 @@ Bundle 'CSApprox'
 Bundle 'Rip-Rip/clang_complete'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/neosnippet'
+Bundle 'Shougo/neosnippet-snippets'
 Bundle 'honza/vim-snippets'
 Bundle 'davidhalter/jedi-vim'
 "Bundle 'Valloric/YouCompleteMe'

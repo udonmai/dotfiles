@@ -20,3 +20,6 @@ _pip_completion()
 complete -o default -F _pip_completion pip
 # pip bash completion end
 
+# fix some clang problem when gem install rails
+export ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future"
+
