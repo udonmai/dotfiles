@@ -9,6 +9,7 @@ export PATH="$PATH:/usr/local/bin/node:/usr/local/bin/npm:/usr/local/share/npm/b
 export PATH="$PATH:/Users/udonmai/bin"
 
 #export http_proxy=127.0.0.1:8087
+#export http_proxy=proxy.kuins.net:8080
 
 # pip bash completion start
 _pip_completion()

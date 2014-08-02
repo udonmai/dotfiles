@@ -328,6 +328,10 @@ map <C-K> <C-W>k
 map <C-H> <C-W>h
 map <C-L> <C-W>l
 
+" 剪切板
+vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>"
+
+
 " F5编译和运行C程序，F6编译和运行C++程序
 " 请注意，下述代码在windows下使用会报错
 " 需要去掉./这两个字符
@@ -441,6 +445,9 @@ set formatoptions+=tcqlro
 set textwidth=110
 "配置vimrc, 使得keywordprg=”help” 注：一般情况下，keywordprg默认是!man或!man -s
 autocmd BufNewFile,Bufread *.module,*.inc,*.php set keywordprg="help"
+"php 语法高亮貌似有点问题"
+autocmd FileType php syntax on
+
 "autoload _vimrc
 "autocmd! bufwritepost _vimrc source %
 
@@ -615,8 +622,9 @@ let g:neocomplcache_force_omni_patterns.objc = '[^.[:digit:] *\t]\%(\.\|->\)'
 let g:neocomplcache_force_omni_patterns.objcpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 " 兼容jedi
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#auto_vim_configuration = 0
 let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
-let g:neocomplcache_omni_functions.python = 'jedi#complete'
 
 " rank sourch list
 let g:neocomplcache_source_rank = {
@@ -700,7 +708,7 @@ hi link EasyMotionShade  Comment
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                AutoClose                 """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
-let g:AutoClosePairs_add = "<>"
+let g:AutoClosePairs_add = ""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                YankRing                  """""""""""""""""""""
@@ -779,4 +787,3 @@ nnoremap <Leader>sl :call FSwitch('%', 'wincmd l')<cr>
 nnoremap <Leader>sr :call FSwitch('%', 'wincmd r')<cr>
 " Creates a new window on the left and opens the companion file in it
 nnoremap <Leader>sv :FSSplitLeft<cr>
-
