@@ -94,7 +94,7 @@ Bundle 'grep.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'YankRing.vim'
 Bundle 'sjl/gundo.vim'
-Bundle 'wincent/Command-T'
+Bundle 'wincent/command-t'
 Bundle 'derekwyatt/vim-fswitch'
 "Bundle 'vim-flake8'
 
