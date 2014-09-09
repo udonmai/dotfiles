@@ -27,7 +27,7 @@ Bundle 'gmarik/vundle'
 """""""""""""""""""""""""""""""
 " 语法高亮
 """""""""""""""""""""""""""""""
-Bundle 'molokai'
+Bundle 'tomasr/molokai'
 Bundle 'JavaScript-syntax'
 Bundle 'jQuery'
 Bundle 'othree/html5.vim'
@@ -65,6 +65,7 @@ Bundle 'Rip-Rip/clang_complete'
 Bundle 'Shougo/neocomplete'
 Bundle 'Shougo/neosnippet'
 Bundle 'Shougo/neosnippet-snippets'
+Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
 Bundle 'davidhalter/jedi-vim'
 "Bundle 'Valloric/YouCompleteMe'
@@ -117,6 +118,8 @@ filetype plugin indent on     " required!
 
 "颜色
 colorscheme molokai
+let g:molokai_original = 1
+let g:rehash256 = 1
 
 "字体
 set guifontwide=Monaco:h13
@@ -432,7 +435,7 @@ augroup END
 " 启用WinManager
 "let g:winManagerWindowLayout='FileExplorer'
 "nmap wm :WMToggle<cr>
-"
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                  PHP Sp                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -524,24 +527,20 @@ nnoremap <silent> <F3> :Grep<CR>
 let g:Powerline_symbols = 'fancy'  " 启用 smartcase.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"             NeoComplCache                 """""""""""""""""""""
+"               NeoComplete                 """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " 停用 AutoComplPop.
-"let g:acp_enableAtStartup = 0
-" 启用 neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-
-let g:neocomplcache_enable_smart_case = 1
-" 启用大写字母补全.
-let g:neocomplcache_enable_camel_case_completion = 1
-" 启用下划线补全.
-let g:neocomplcache_enable_underbar_completion = 1
+let g:acp_enableAtStartup = 0
+" 启用 neocomplete.
+let g:neocomplete#enable_at_startup = 1
+"
+let g:neocomplete#enable_smart_case = 1
 " 设定最小语法关键词长度.
-let g:neocomplcache_min_syntax_length = 2
-
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+"
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 " 定义字典.
-let g:neocomplcache_dictionary_filetype_lists = {
+let g:neocomplete#dictionary_filetype_lists = {
 	\ 'default' : '',
 	\ 'vimshell' : $HOME.'/.vimshell_hist',
 	\ 'scheme' : $HOME.'/.gosh_completions',
@@ -550,23 +549,21 @@ let g:neocomplcache_dictionary_filetype_lists = {
 "	\ 'css' : $HOME.'.vim/dict/css.dic',
 "	\ 'javascript' : $HOME.'.vim/dict/javascript.dic'
 
-"include_complete be abled
-let g:neocomplcache_ctags_program = '/usr/local/bin/ctags'
+"include_complete be abled "ctags
+let g:neocomplete#ctags_command = '/usr/local/bin/ctags'
 
 " 定义关键词.
-if !exists('g:neocomplcache_keyword_patterns')
-	let g:neocomplcache_keyword_patterns = {}
+if !exists('g:neocomplete#keyword_patterns')
+	let g:neocomplete#keyword_patterns = {}
 endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " 插件键映射.
-imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-smap <C-k>     <Plug>(neocomplcache_snippets_expand)
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " 类似于SuperTab用法 .
-"imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+"imap <expr><TAB> neocomplete#sources#snippets_complete#expandable() ? "\<Plug>(neocomplete#snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " 推荐的键映射.
 " <CR>: close popup and save indent.
@@ -576,25 +573,27 @@ function! s:my_cr_function()
 	" For no inserting <CR> key.
 	"return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
+
 " <TAB>: completion. NO USE with snipmate
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-Y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
-"inoremap <expr><Enter>  pumvisible() ? neocomplcache#close_popup()."\<C-n>" : "\<Enter>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-Y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+"inoremap <expr><Enter>  pumvisible() ? neocomplete#close_popup()."\<C-n>" : "\<Enter>"
 "inoremap <expr><Enter>  pumvisible() ? "\<C-Y>" : "\<Enter>"
 
 " 类似于AutoComplPop用法 .
-"let g:neocomplcache_enable_auto_select = 1
+"let g:neocomplete#enable_auto_select = 1
 " 类似于 Shell 用法(不推荐).
 "set completeopt+=longest
-"let g:neocomplcache_enable_auto_select = 1
-"let g:neocomplcache_disable_auto_complete = 1
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<TAB>"
-"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+"inoremap <expr><CR>  neocomplete#smart_close_popup() . "\<CR>"
 
 " 启用 omni 补全.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -603,40 +602,53 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP "vim默认
-"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
 " 启用 heavy omni 补全.
-if !exists('g:neocomplcache_omni_patterns')
-	let g:neocomplcache_omni_patterns = {}
+if !exists('g:neocomplete#sources#omni#functions')
+	let g:neocomplete#sources#omni#functions = {}
 endif
-if !exists('g:neocomplcache_omni_functions')
-	let g:neocomplcache_omni_functions = {}
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
 endif
-if !exists('g:neocomplcache_force_omni_patterns')
-	let g:neocomplcache_force_omni_patterns = {}
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
 endif
 
-"let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-"let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+
+"let g:neocomplete#omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+"let g:neocomplete#omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
 " 兼容clang_complete
-let g:neocomplcache_force_overwrite_completefunc = 1
-let g:neocomplcache_force_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-let g:neocomplcache_force_omni_patterns.objc = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplcache_force_omni_patterns.objcpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_overwrite_completefunc = 1
+let g:neocomplete#force_omni_input_patterns.c =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:neocomplete#force_omni_input_patterns.cpp =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:neocomplete#force_omni_input_patterns.objc =
+      \ '\[\h\w*\s\h\?\|\h\w*\%(\.\|->\)'
+let g:neocomplete#force_omni_input_patterns.objcpp =
+      \ '\[\h\w*\s\h\?\|\h\w*\%(\.\|->\)\|\h\w*::\w*'
+let g:clang_complete_auto = 0
+let g:clang_auto_select = 0
+"let g:clang_use_library = 1
 
 " 兼容jedi
 autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#completions_enabled = 0
 let g:jedi#auto_vim_configuration = 0
-let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
+let g:neocomplete#force_omni_input_patterns.python =
+\ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
-" rank sourch list
-let g:neocomplcache_source_rank = {
-	\ 'buffer_complete'     : 6,
-	\ 'dictionary_complete' : 5,
-	\ 'syntax_complete'     : 4,
-	\ }
+" rank sourch list "deleted
+"let g:neocomplete#source_rank = {
+"	\ 'buffer_complete'     : 6,
+"	\ 'dictionary_complete' : 5,
+"	\ 'syntax_complete'     : 4,
+"	\ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                NeoSnippet                """""""""""""""""""""
@@ -663,6 +675,18 @@ endif
 
 " Tell Neosnippet about the other snippets
 " let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                UltiSnipts                """""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<C-k>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "              Clang_Complete              """""""""""""""""""""
