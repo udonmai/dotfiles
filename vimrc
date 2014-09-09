@@ -570,7 +570,12 @@ inoremap <expr><C-l>     neocomplcache#complete_common_string()
 
 " 推荐的键映射.
 " <CR>: close popup and save indent.
-inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+	return neocomplete#close_popup() . "\<CR>"
+	" For no inserting <CR> key.
+	"return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
 " <TAB>: completion. NO USE with snipmate
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
@@ -670,6 +675,7 @@ let g:clang_use_library = 1
 let g:clang_complete_auto = 0
 let g:clang_auto_select = 0
 "let g:clang_user_options = '|| exit 0'
+let g:clang_library_path = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "               Syntastic                  """""""""""""""""""""
