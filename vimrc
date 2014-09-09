@@ -62,7 +62,7 @@ Bundle 'CSApprox'
 "Bundle 'Pydiction'
 
 Bundle 'Rip-Rip/clang_complete'
-Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/neocomplete'
 Bundle 'Shougo/neosnippet'
 Bundle 'Shougo/neosnippet-snippets'
 Bundle 'honza/vim-snippets'
@@ -555,7 +555,7 @@ let g:neocomplcache_ctags_program = '/usr/local/bin/ctags'
 
 " 定义关键词.
 if !exists('g:neocomplcache_keyword_patterns')
-let g:neocomplcache_keyword_patterns = {}
+	let g:neocomplcache_keyword_patterns = {}
 endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 

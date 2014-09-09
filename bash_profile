@@ -23,6 +23,3 @@ complete -o default -F _pip_completion pip
 
 # fix some clang problem when gem install rails
 export ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future"
-
-#pythonbrew
-[[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc

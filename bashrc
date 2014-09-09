@@ -78,3 +78,5 @@ export PATH="/usr/local/heroku/bin:$PATH"
 eval "$(pyenv init -)"
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
+# proxy
+export http_proxy='proxy.kuins.net:8080'
