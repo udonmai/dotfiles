@@ -16,99 +16,107 @@
 set nocompatible	" be iMproved
 filetype off		" required!
 
-set rtp+=~/.vim/bundle/vundle/ 
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/ 
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " My Bundle here:
 """""""""""""""""""""""""""""""
 " 语法高亮
 """""""""""""""""""""""""""""""
-Bundle 'tomasr/molokai'
-Bundle 'JavaScript-syntax'
-Bundle 'jQuery'
-Bundle 'othree/html5.vim'
-Bundle 'groenewege/vim-less'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'Markdown'
-Bundle 'Markdown-syntax'
-"Bundle 'php.vim-html-enhanced' "一个TAB为3个空格 = =
+Plugin 'tomasr/molokai'
+Plugin 'altercation/vim-colors-solarized'
+
+Plugin 'JavaScript-syntax'
+Plugin 'jQuery'
+Plugin 'othree/html5.vim'
+Plugin 'groenewege/vim-less'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'Markdown'
+Plugin 'Markdown-syntax'
+"Plugin 'php.vim-html-enhanced' "一个TAB为3个空格 = =
 "增加了rgb显示颜色和同行显示多处颜色
-Bundle 'skammer/vim-css-color'
-Bundle 'Valloric/vim-operator-highlight'
+Plugin 'skammer/vim-css-color'
+Plugin 'Valloric/vim-operator-highlight'
 
 " User Interface
 """""""""""""""""""""""""""""""
-"Bundle 'winmanager'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'xolox/vim-easytags'
-Bundle 'xolox/vim-misc'
-"Bundle 'taglist.vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'fholgado/minibufexpl.vim'
-"Bundle 'bufexplorer.zip'
-Bundle 'Lokaltog/vim-powerline'
+"Plugin 'winmanager'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-misc'
+"Plugin 'taglist.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'fholgado/minibufexpl.vim'
+"Plugin 'bufexplorer.zip'
+"Plugin 'Lokaltog/vim-powerline'
+Plugin 'bling/vim-airline'
 "Make gvim-only colorschemes work transparently in terminal vim
-Bundle 'CSApprox' 
+Plugin 'CSApprox' 
 
 " AutoComplete
 """""""""""""""""""""""""""""""
-"Bundle 'AutoComplPop'
-"Bundle 'msanders/snipmate.vim' "自带了snippets
-"Bundle 'Pydiction'
+"Plugin 'AutoComplPop'
+"Plugin 'msanders/snipmate.vim' "自带了snippets
+"Plugin 'Pydiction'
 
-Bundle 'Rip-Rip/clang_complete'
-Bundle 'Shougo/neocomplete'
-Bundle 'Shougo/neosnippet'
-Bundle 'Shougo/neosnippet-snippets'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
-Bundle 'davidhalter/jedi-vim'
-"Bundle 'Valloric/YouCompleteMe'
+Plugin 'Rip-Rip/clang_complete'
+Plugin 'Shougo/neocomplete'
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neosnippet-snippets'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'davidhalter/jedi-vim'
+"Plugin 'Valloric/YouCompleteMe'
 
 " support for snipmate 
-"Bundle 'MarcWeber/vim-addon-mw-utils'
-"Bundle 'tomtom/tlib_vim'
-"Bundle 'honza/snipmate-snippets'
-"Bundle 'spf13/snipmate-snippets'
-"Bundle 'garbas/vim-snipmate'
+"Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'tomtom/tlib_vim'
+"Plugin 'honza/snipmate-snippets'
+"Plugin 'spf13/snipmate-snippets'
+"Plugin 'garbas/vim-snipmate'
 
-Bundle 'ZenCoding.vim'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tpope/vim-surround'
-"Bundle 'Raimondi/delimitMate'
-Bundle 'Townk/vim-autoclose'
-Bundle 'matchit.zip'
+Plugin 'ZenCoding.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-surround'
+"Plugin 'Raimondi/delimitMate'
+Plugin 'Townk/vim-autoclose'
+Plugin 'matchit.zip'
 " press K on a function for full PHP manual
-"Bundle 'spf13/PIV'
-Bundle 'shawncplus/phpcomplete.vim'
+"Plugin 'spf13/PIV'
+Plugin 'shawncplus/phpcomplete.vim'
 
 " Tools
 """"""""""""""""""""""""""""""
-Bundle 'udonmai/Conque-Shell'
-Bundle 'grep.vim'
+Plugin 'udonmai/Conque-Shell'
+Plugin 'grep.vim'
 
-Bundle 'scrooloose/syntastic'
-Bundle 'YankRing.vim'
-Bundle 'sjl/gundo.vim'
-Bundle 'wincent/command-t'
-Bundle 'derekwyatt/vim-fswitch'
-"Bundle 'vim-flake8'
+Plugin 'scrooloose/syntastic'
+Plugin 'YankRing.vim'
+Plugin 'sjl/gundo.vim'
+Plugin 'wincent/command-t'
+Plugin 'derekwyatt/vim-fswitch'
+"Plugin 'vim-flake8'
+Plugin 'tpope/vim-fugitive'
 
+" shell
+Plugin 'edkolev/promptline.vim'
+
+call vundle#end()
 filetype plugin indent on     " required!
 "
 " Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+" :PluginList          - list configured Plugins
+" :PluginInstall(!)    - install(update) Plugins
+" :PluginSearch(!) foo - search(or refresh cache first) for foo
+" :PluginClean(!)      - confirm(or auto-approve) removal of unused Plugins
 "
 " see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
+" NOTE: comments after Plugin command are not allowed..
 
 
 """"""""""""""""""""""""""""""Ace""""""""""""""""""""""""""""""""""""
@@ -117,6 +125,10 @@ filetype plugin indent on     " required!
 "runtime! debian.vim
 
 "颜色
+"let g:solarized_termcolors=256
+"set background=light
+"colorscheme solarized
+
 colorscheme molokai
 let g:molokai_original = 1
 let g:rehash256 = 1
@@ -524,7 +536,77 @@ nnoremap <silent> <F3> :Grep<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "               Powerline                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
-let g:Powerline_symbols = 'fancy'  " 启用 smartcase.
+"let g:Powerline_symbols = 'fancy'  " 启用 smartcase.
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                 Airline                   """""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline_powerline_fonts = 0
+let g:airline#extensions#tabline#enabled = 0
+
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#virtualenv#enabled = 1
+
+let g:airline_theme = 'solarized'
+
+let g:airline#extensions#default#layout = [
+	\ [ 'a', 'b', 'c' ],
+	\ [ 'x', 'y', 'z', 'warning', 't' ]
+	\ ]
+let g:airline_section_t = '%{strftime("%a %k:%M")}'
+
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+
+" unicode symbols
+"let g:airline_left_sep = '»'
+"let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '«'
+"let g:airline_right_sep = '◀'
+"let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.linenr = '␤'
+"let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+"let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.linenr = ''
+
+" old vim-powerline symbols
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                Promptline                 """""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:promptline_theme = 'airline_visual'
+let g:promptline_preset = 'full'
+
+let g:promptline_powerline_symbols = 0
+let g:promptline_symbols = {
+    \ 'left'       : '⮀',
+    \ 'left_alt'   : '⮁',
+    \ 'dir_sep'    : ' ⮁ ',
+    \ 'truncation' : '···',
+    \ 'vcs_branch' : '⭠',
+    \ 'space'      : ' '}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "               NeoComplete                 """""""""""""""""""""
@@ -706,9 +788,9 @@ let g:clang_library_path = "/Applications/Xcode.app/Contents/Developer/Toolchain
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_check_on_open = 1
 let g:syntastic_error_symbol = '✗'
-let g:syntastic_style_error_symbol = 's✗'
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_style_warning_symbol = 's⚠'
+let g:syntastic_style_error_symbol = '✠'
+let g:syntastic_warning_symbol = '∆'
+let g:syntastic_style_warning_symbol = '≈'
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_python_checkers=['flake8']
