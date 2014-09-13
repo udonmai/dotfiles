@@ -1,7 +1,7 @@
 
 """"" """ " Love your Life, please " """ """""
         """"""""" """ " """ """""""""
-		
+
 " Source a global configuration file if available
 "if filereadable("/etc/vim/vimrc.local")
 "	source /etc/vim/vimrc.local
@@ -543,7 +543,6 @@ nnoremap <silent> <F3> :Grep<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 0
-
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#virtualenv#enabled = 1
