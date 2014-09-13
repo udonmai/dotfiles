@@ -124,10 +124,24 @@ filetype plugin indent on     " required!
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "runtime! debian.vim
 
-"颜色
+" 纵向线
+augroup cch
+	autocmd! cch
+	autocmd WinLeave * set nocursorline
+	autocmd WinLeave * set nocursorcolumn
+	autocmd WinEnter,BufRead * set cursorline
+	autocmd WinEnter,BufRead * set cursorcolumn
+augroup END
+
+" 设置配色和CSApprox
+set t_Co=256
+let g:CSApprox_attr_map={'bold':'bold','italic':'','sp':''}
+"colo elise
+
+syntax enable
 "let g:solarized_termcolors=256
-"set background=light
 "colorscheme solarized
+"set background=dark
 
 colorscheme molokai
 let g:molokai_original = 1
@@ -430,20 +444,6 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
-" 设置配色和CSApprox
-set t_Co=256
-let g:CSApprox_attr_map={'bold':'bold','italic':'','sp':''}
-"colo elise
-
-" 纵向线
-augroup cch
-	autocmd! cch
-	autocmd WinLeave * set nocursorline
-	autocmd WinLeave * set nocursorcolumn
-	autocmd WinEnter,BufRead * set cursorline
-	autocmd WinEnter,BufRead * set cursorcolumn
-augroup END
-
 " 启用WinManager
 "let g:winManagerWindowLayout='FileExplorer'
 "nmap wm :WMToggle<cr>
@@ -602,7 +602,7 @@ let g:promptline_preset = 'full'
 let g:promptline_powerline_symbols = 0
 let g:promptline_symbols = {
     \ 'left'       : '⮀',
-    \ 'left_alt'   : '⮁',
+    \ 'left_alt'   : '&',
     \ 'dir_sep'    : ' ⮁ ',
     \ 'truncation' : '···',
     \ 'vcs_branch' : '⭠',
