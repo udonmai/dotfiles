@@ -84,4 +84,3 @@ source ~/.shp.sh
 # proxy
 #export http_proxy='proxy.kuins.net:8080'
 
-####

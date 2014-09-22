@@ -1,4 +1,3 @@
-
 """"" """ " Love your Life, please " """ """""
         """"""""" """ " """ """""""""
 
@@ -71,6 +70,7 @@ Plugin 'Shougo/neosnippet-snippets'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
 "Plugin 'Valloric/YouCompleteMe'
 
 " support for snipmate 
@@ -102,6 +102,8 @@ Plugin 'wincent/command-t'
 Plugin 'derekwyatt/vim-fswitch'
 "Plugin 'vim-flake8'
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'godlygeek/tabular'
 
 " shell
 Plugin 'edkolev/promptline.vim'
@@ -148,8 +150,10 @@ let g:molokai_original = 1
 let g:rehash256 = 1
 
 "字体
-set guifontwide=Monaco:h13
-set guifont=Monaco:h13
+set guifontwide=Consols:h14
+set guifont=Consolas:h14
+"set guifontwide=Monaco:h13
+"set guifont=Monaco:h13
 "set guifontwide=YaHei\ Consolas\ Hybrid\ 12 
 "set guifont=YaHei\ Consolas\ Hybrid\ 12 
 
@@ -328,7 +332,7 @@ set completeopt=menuone
 " 只在下列文件类型被侦测到的时候显示行号，普通文本文件不显示
 if has("autocmd") 
 	autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
-	autocmd FileType xml,html,css,js,javascript,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,markdown,sh,md set number
+	autocmd FileType xml,html,css,js,javascript,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,markdown,sh,md,tex set number
 	autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
 	autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o
 	autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python setlocal textwidth=100
@@ -534,7 +538,7 @@ let mapleader="," "修改<leader>的映射键为','
 nnoremap <silent> <F3> :Grep<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"               Powerline                   """""""""""""""""""""
+"                Powerline                  """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 "let g:Powerline_symbols = 'fancy'  " 启用 smartcase.
 
@@ -757,6 +761,23 @@ endif
 " Tell Neosnippet about the other snippets
 " let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                LaTex Box                 """""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:neocomplete#force_omni_input_patterns.tex =
+      \ '\v\\\a*(ref|cite)\a*([^]]*\])?\{(|[^}]*,)'
+
+map <silent> <Leader>ls :silent
+	\ !/Applications/Skim.app/Contents/SharedSupport/displayline
+	\ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
+	\ "%:p" <CR>
+
+let g:LatexBox_viewer = 'open -a /Applications/Skim.app'
+"let g:LatexBox_viewer = 'Skim'
+let g:LatexBox_latexmk_options = "-pdflatex='pdflatex -synctex=1 \%O \%S'"
+let g:LatexBox_latexmk_async = 1
+let g:LatexBox_latexmk_preview_continuously = 1
+let g:LatexBox_quickfix = 2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                UltiSnipts                """""""""""""""""""""
@@ -786,10 +807,10 @@ let g:clang_library_path = "/Applications/Xcode.app/Contents/Developer/Toolchain
 "               Syntastic                  """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_check_on_open = 1
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_style_error_symbol = '✠'
-let g:syntastic_warning_symbol = '∆'
-let g:syntastic_style_warning_symbol = '≈'
+let g:syntastic_error_symbol = '✗✗'
+let g:syntastic_style_error_symbol = '✠✠'
+let g:syntastic_warning_symbol = '∆∆'
+let g:syntastic_style_warning_symbol = '≈≈'
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_python_checkers=['flake8']
@@ -812,7 +833,7 @@ let g:gundo_preview_bottom = 1
 let g:user_zen_expandabbr_key='<C-u>'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                EasyMotion                """""""""""""""""""""
+"               EasyMotion                 """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 "兼容大部分配色方案
 hi link EasyMotionTarget ErrorMsg
@@ -858,7 +879,6 @@ nnoremap <leader>t :CommandT<cr>
 nnoremap <leader>n :CommandTBuffer<cr>
 nnoremap <leader>' :CommandTFlush<cr>
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                 jedi                     """"""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -900,3 +920,27 @@ nnoremap <Leader>sl :call FSwitch('%', 'wincmd l')<cr>
 nnoremap <Leader>sr :call FSwitch('%', 'wincmd r')<cr>
 " Creates a new window on the left and opens the companion file in it
 nnoremap <Leader>sv :FSSplitLeft<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"               Tabular                    """"""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+if exists(":Tabularize")
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:\zs<CR>
+    vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
+
+" instant align
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+function! s:align()
+	let p = '^\s*|\s.*\s|\s*$'
+	if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+		let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+		let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+		Tabularize/|/l1
+		normal! 0
+		call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+	endif
+endfunction
+
