@@ -1,0 +1,20 @@
+# 关闭 apple 的特殊渲染
+defaults write com.googlecode.iterm2 AppleFontSmoothing -int 0
+- - -
+There are five settings for font smoothing:
+Automatic - Best for Main Display
+
+	Standard - Best for CRT (option 1)
+	Light (option 2)
+	Medium - Best for Flat Panel (option 3)
+	Strong (option 4)
+
+	To tightly control this so that you are no longer in the automatic world, use Terminal.app to change the
+	property system-wide. I suspect if you do this, the display switching (between monitors and I suspect
+	perhaps your screen saver for suspend/resume) should no longer mess with your settings.
+
+In Terminal.app, enter:
+
+	defaults -currentHost write -globalDomain AppleFontSmoothing -int 2
+
+- - - - -
