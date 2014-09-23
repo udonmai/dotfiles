@@ -22,8 +22,9 @@ call vundle#begin()
 " required
 Plugin 'gmarik/Vundle.vim'
 
-" My Bundle here:
-"""""""""""""""""""""""""""""""
+
+" Bundle here:
+
 " 语法高亮
 """""""""""""""""""""""""""""""
 Plugin 'tomasr/molokai'
@@ -37,8 +38,7 @@ Plugin 'hail2u/vim-css3-syntax'
 Plugin 'Markdown'
 Plugin 'Markdown-syntax'
 "Plugin 'php.vim-html-enhanced' "一个TAB为3个空格 = =
-"增加了rgb显示颜色和同行显示多处颜色
-Plugin 'skammer/vim-css-color'
+Plugin 'skammer/vim-css-color' "增加了rgb显示颜色和同行显示多处颜色
 Plugin 'Valloric/vim-operator-highlight'
 
 " User Interface
@@ -54,8 +54,7 @@ Plugin 'fholgado/minibufexpl.vim'
 "Plugin 'bufexplorer.zip'
 "Plugin 'Lokaltog/vim-powerline'
 Plugin 'bling/vim-airline'
-"Make gvim-only colorschemes work transparently in terminal vim
-Plugin 'CSApprox' 
+Plugin 'CSApprox' "Make gvim-only colorschemes work transparently in terminal vim
 
 " AutoComplete
 """""""""""""""""""""""""""""""
@@ -86,19 +85,20 @@ Plugin 'tpope/vim-surround'
 "Plugin 'Raimondi/delimitMate'
 Plugin 'Townk/vim-autoclose'
 Plugin 'matchit.zip'
-" press K on a function for full PHP manual
-"Plugin 'spf13/PIV'
+"Plugin 'spf13/PIV' "press K on a function for full PHP manual
 Plugin 'shawncplus/phpcomplete.vim'
 
 " Tools
 """"""""""""""""""""""""""""""
+Plugin 'scrooloose/syntastic'
+Plugin 'Shougo/vimproc.vim' "make needed
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/neomru.vim'
+Plugin 'Shougo/unite-outline'
 Plugin 'udonmai/Conque-Shell'
 Plugin 'grep.vim'
-
-Plugin 'scrooloose/syntastic'
 Plugin 'YankRing.vim'
 Plugin 'sjl/gundo.vim'
-Plugin 'wincent/command-t'
 Plugin 'derekwyatt/vim-fswitch'
 "Plugin 'vim-flake8'
 Plugin 'tpope/vim-fugitive'
@@ -106,7 +106,9 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 
 " shell
+""""""""""""""""""""""""""""""
 Plugin 'edkolev/promptline.vim'
+
 
 call vundle#end()
 filetype plugin indent on     " required!
@@ -149,7 +151,7 @@ colorscheme molokai
 let g:molokai_original = 1
 let g:rehash256 = 1
 
-"字体
+" 字体
 set guifontwide=Consols:h14
 set guifont=Consolas:h14
 "set guifontwide=Monaco:h13
@@ -535,7 +537,7 @@ let mapleader="," "修改<leader>的映射键为','
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                  Grep                     """""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""" 
-nnoremap <silent> <F3> :Grep<CR>
+nnoremap <silent> <C-G> :Grep<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                Powerline                  """""""""""""""""""""
@@ -594,7 +596,6 @@ let g:airline_right_alt_sep = '⮃'
 let g:airline_symbols.branch = '⭠'
 let g:airline_symbols.readonly = '⭤'
 let g:airline_symbols.linenr = '⭡'
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                Promptline                 """""""""""""""""""""
@@ -804,6 +805,24 @@ let g:clang_auto_select = 0
 let g:clang_library_path = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                 Unite                    """""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:unite_source_history_yank_enable = 1
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+
+nnoremap <Leader>f :Unite -start-insert -auto-preview buffer file_rec/async<CR>
+nnoremap <Leader>o :Unite -start-insert -auto-preview outline<CR>
+nnoremap <Leader>g :Unite -start-insert grep:.<CR>
+nnoremap <Leader>m :Unite -start-insert buffer tab file_mru directory_mru<CR>
+
+" Vimproc required
+"nnoremap <Leader>f :Unite -no-split -start-insert file_rec/async<cr>
+"nnoremap <leader>ft :Unite file_rec/async -default-action=tabopen
+"nnoremap <leader>fs :Unite file_rec/async -default-action=split
+"nnoremap <leader>fv :Unite file_rec/async -default-action=vsplit
+"nnoremap <leader>fc :Unite file_rec/async
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "               Syntastic                  """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_check_on_open = 1
@@ -859,25 +878,6 @@ nnoremap <leader>r :YRShow<CR>
 function! YRRunAfterMaps()
     nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
 endfunction
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"               Command-T                  """""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:CommandTMaxHeight          = 30
-let g:CommandTMatchWindowReverse = 0 " shows results in reverse order
-
-" MacVim doesn't use tab focus to switch from command-t input field to the file
-" list, so using j and k for next and prev screws everything up. But it does
-" work on linux so let's use it there.
-if has("gui_gtk2")
-	let g:commandtselectnextmap  = [ '<down>' ]
-	let g:commandtselectprevmap  = [ '<up>' ]
-endif
-
-set wildignore+=*.o,*.obj,.git,*.pyc,*.so,blaze*,READONLY,llvm,Library*,CMakeFiles
-nnoremap <leader>t :CommandT<cr>
-nnoremap <leader>n :CommandTBuffer<cr>
-nnoremap <leader>' :CommandTFlush<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                 jedi                     """"""""""""""""""""
