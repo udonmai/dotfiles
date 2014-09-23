@@ -1,30 +1,20 @@
+
 """"" """ " Love your Life, please " """ """""
         """"""""" """ " """ """""""""
-
-" Source a global configuration file if available
-"if filereadable("/etc/vim/vimrc.local")
-"	source /etc/vim/vimrc.local
-"endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                  Vundle                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
-" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-" BundleInstall
-
 set nocompatible	" be iMproved
 filetype off		" required!
 
 set rtp+=~/.vim/bundle/Vundle.vim/ 
 call vundle#begin()
 
-" let Vundle manage Vundle
-" required
 Plugin 'gmarik/Vundle.vim'
 
-
 " Bundle here:
-
+""""""""""""""
 " 语法高亮
 """""""""""""""""""""""""""""""
 Plugin 'tomasr/molokai'
@@ -44,6 +34,7 @@ Plugin 'Valloric/vim-operator-highlight'
 " User Interface
 """""""""""""""""""""""""""""""
 "Plugin 'winmanager'
+Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'xolox/vim-easytags'
@@ -104,6 +95,8 @@ Plugin 'derekwyatt/vim-fswitch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
+Plugin 'terryma/vim-expand-region'
+Plugin 'terryma/vim-multiple-cursors'
 
 " shell
 """"""""""""""""""""""""""""""
@@ -112,13 +105,7 @@ Plugin 'edkolev/promptline.vim'
 
 call vundle#end()
 filetype plugin indent on     " required!
-"
-" Brief help
-" :PluginList          - list configured Plugins
-" :PluginInstall(!)    - install(update) Plugins
-" :PluginSearch(!) foo - search(or refresh cache first) for foo
-" :PluginClean(!)      - confirm(or auto-approve) removal of unused Plugins
-"
+
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Plugin command are not allowed..
 
@@ -236,7 +223,8 @@ set rulerformat=%20(%2*%<%f%=\ %m%r\ %3l\ %c\ %p%%%)
 set cmdheight=2
 
 " 使回格键（backspace）正常处理indent, eol, start等
-set backspace=2
+set backspace=indent,eol,start
+"set backspace=2
 
 " 允许backspace和光标键跨越行边界
 set whichwrap+=<,>,h,l
@@ -311,7 +299,7 @@ set softtabstop=4
 set shiftwidth=4
 
 " 不要用空格代替制表符
-set noexpandtab
+set expandtab
 
 " 不要换行
 set nowrap
@@ -331,19 +319,24 @@ set completeopt=menuone
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " autocommands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 只在下列文件类型被侦测到的时候显示行号，普通文本文件不显示
 if has("autocmd") 
-	autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
 	autocmd FileType xml,html,css,js,javascript,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,markdown,sh,md,tex set number
-	autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
+	autocmd Filetype python setlocal textwidth=79 expandtab tabstop=4 shiftwidth=4
+	autocmd Filetype php setlocal expandtab tabstop=4 shiftwidth=4
+	autocmd FileType haskell,puppet,ruby,javascript,html,yaml,sass,scss,css,jinja,vim setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType text setlocal textwidth=80
 	autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o
-	autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python setlocal textwidth=100
+	autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
+	"autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl setlocal textwidth=100
 	"autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
 	"autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
 
-	" JavaScript 语法高亮
 	au FileType html,javascript let g:javascript_enable_domhtmlcss = 1
-	au BufRead,BufNewFile *.js setf jquery
+	au BufRead,BufNewFile *.json setfiletype json syntax=javascript
+	au BufRead,BufNewFile *.js setfiletype jquery
+	au BufRead,BufNewFile *.md setfiletype markdown
+	au BufRead,BufNewFile *.less setfiletype css
+	au BufRead,BufNewFile *.styl setfiletype css
 	
 	autocmd BufReadPost *
 	\ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -354,6 +347,9 @@ endif "has("autocmd")"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 键映射
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"修改<leader>的映射键为','
+let mapleader=","
+
 inoremap jj <ESC>
 noremap <Leader>q :qa<cr>
 
@@ -362,6 +358,30 @@ map <C-J> <C-W>j
 map <C-K> <C-W>k
 map <C-H> <C-W>h
 map <C-L> <C-W>l
+
+" 命令行模式增强，ctrl - a到行首， -e 到行尾
+"cnoremap <C-a> <Home>
+"cnoremap <C-e> <End>
+noremap <C-a> <esc>^
+noremap! <C-a> <esc>^i
+noremap <C-e> <End>
+inoremap <C-e> <esc>$a "not work
+
+" Reselect visual block after indent/outdent.
+" 调整缩进后自动选中，方便再次操作
+vnoremap < <gv
+vnoremap > >gv
+
+" select block
+nnoremap <Leader>v V}
+
+" remap U to <C-r> for easier redo
+nnoremap U <C-r>
+
+" ,m -> fix dos ^M
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+nnoremap ; :
 
 " 剪切板
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>"
@@ -393,32 +413,32 @@ endfunc
 "map <F8><F8> :w<CR>:call Debug()<CR>
 
 func CompileRun() 
-    exec “w”  
-    if &filetype == ‘c’  
-        exec “!gcc % -g -o %<” 
-        exec “!.\/%<” 
-    elseif &filetype ==’cpp’ 
-        exec “!g++ % -g -o %<” 
-        exec “!.\/%<” 
-    elseif &filetype == ‘python’ 
-        exec “!python %” 
-    endif 
+  exec “w”
+  if &filetype == ‘c’  
+    exec “!gcc % -g -o %<” 
+    exec “!.\/%<” 
+  elseif &filetype ==’cpp’ 
+    exec “!g++ % -g -o %<” 
+    exec “!.\/%<” 
+  elseif &filetype == ‘python’ 
+    exec “!python %” 
+  endif 
 endfunc
 
-func Debug() 
-    exec “w”  
-    if &filetype == ‘c’  
-        exec “!rm %<” 
-        exec “!gcc % -g -o %<” 
-        exec “!gdb %<” 
-    elseif &filetype == ‘cpp’ 
-        exec “!rm %<” 
-        exec “!g++ % -g -o %<” 
-        exec “!gdb %<” 
-        exec “!rm %<.class” 
-    elseif &filetype == ‘python’ 
-        exec “!pdb %” 
-    endif 
+func Debug()
+  exec “w”
+  if &filetype == ‘c’
+    exec “!rm %<”
+    exec “!gcc % -g -o %<”
+    exec “!gdb %<”
+  elseif &filetype == ‘cpp’
+    exec “!rm %<”
+    exec “!g++ % -g -o %<”
+    exec “!gdb %<”
+    exec “!rm %<.class”
+  elseif &filetype == ‘python’
+    exec “!pdb %” 
+  endif
 endfunc
 
 " 能够漂亮地显示.NFO文件
@@ -462,8 +482,6 @@ let g:miniBufExplModSelTarget = 1
 let PHP_removeCRwhenUnix = 1
 " Set up automatic formatting
 set formatoptions+=tcqlro
-" Set maximum text width (for wrapping)
-set textwidth=110
 "配置vimrc, 使得keywordprg=”help” 注：一般情况下，keywordprg默认是!man或!man -s
 autocmd BufNewFile,Bufread *.module,*.inc,*.php set keywordprg="help"
 "php 语法高亮貌似有点问题"
@@ -480,6 +498,11 @@ autocmd FileType php syntax on
 "let g:pydiction_location = '~/.vim/bundle/Pydiction'
 "defalut g:pydiction_menu_height == 15	
 "let g:pydiction_menu_height = 20 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"              indent guides                """""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:indent_guides_enable_on_vim_startup = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                 TagBar                    """""""""""""""""""""
@@ -532,7 +555,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "               NerdCommenter               """""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""" 
-let mapleader="," "修改<leader>的映射键为','
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                  Grep                     """""""""""""""""""""
@@ -605,12 +628,12 @@ let g:promptline_preset = 'full'
 
 let g:promptline_powerline_symbols = 0
 let g:promptline_symbols = {
-    \ 'left'       : '⮀',
-    \ 'left_alt'   : '&',
-    \ 'dir_sep'    : ' ⮁ ',
-    \ 'truncation' : '···',
-    \ 'vcs_branch' : '⭠',
-    \ 'space'      : ' '}
+  \ 'left'       : '⮀',
+  \ 'left_alt'   : '&',
+  \ 'dir_sep'    : ' ⮁ ',
+  \ 'truncation' : '···',
+  \ 'vcs_branch' : '⭠',
+  \ 'space'      : ' '}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "               NeoComplete                 """""""""""""""""""""
@@ -711,13 +734,13 @@ if !exists('g:neocomplete#force_omni_input_patterns')
 endif
 let g:neocomplete#force_overwrite_completefunc = 1
 let g:neocomplete#force_omni_input_patterns.c =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+  \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
 let g:neocomplete#force_omni_input_patterns.cpp =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+  \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
 let g:neocomplete#force_omni_input_patterns.objc =
-      \ '\[\h\w*\s\h\?\|\h\w*\%(\.\|->\)'
+  \ '\[\h\w*\s\h\?\|\h\w*\%(\.\|->\)'
 let g:neocomplete#force_omni_input_patterns.objcpp =
-      \ '\[\h\w*\s\h\?\|\h\w*\%(\.\|->\)\|\h\w*::\w*'
+  \ '\[\h\w*\s\h\?\|\h\w*\%(\.\|->\)\|\h\w*::\w*'
 let g:clang_complete_auto = 0
 let g:clang_auto_select = 0
 "let g:clang_use_library = 1
@@ -766,7 +789,7 @@ endif
 "                LaTex Box                 """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 let g:neocomplete#force_omni_input_patterns.tex =
-      \ '\v\\\a*(ref|cite)\a*([^]]*\])?\{(|[^}]*,)'
+  \ '\v\\\a*(ref|cite)\a*([^]]*\])?\{(|[^}]*,)'
 
 " ll for compilation | lv for view
 map <silent> <Leader>ls :silent
@@ -877,7 +900,7 @@ nnoremap <leader>b :YRShow<CR>
 "sense than the default of yanking the whole current line (we can use yy for
 "that)
 function! YRRunAfterMaps()
-    nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+  nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -926,10 +949,10 @@ nnoremap <Leader>sv :FSSplitLeft<cr>
 "               Tabular                    """"""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 if exists(":Tabularize")
-    nmap <Leader>a= :Tabularize /=<CR>
-    vmap <Leader>a= :Tabularize /=<CR>
-    nmap <Leader>a: :Tabularize /:\zs<CR>
-    vmap <Leader>a: :Tabularize /:\zs<CR>
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
 endif
 
 " instant align
@@ -945,3 +968,22 @@ function! s:align()
 	endif
 endfunction
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"           Vim Multiple Cursors           """"""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+" default key mapping is <C-n> to start
+let g:multi_cursor_use_default_mapping=1
+
+"You can then map the 'next', 'previous', 'skip', and 'exit' keys like the following:
+" Default mapping
+" let g:multi_cursor_next_key='<C-n>'
+" let g:multi_cursor_prev_key='<C-p>'
+" let g:multi_cursor_skip_key='<C-x>'
+" let g:multi_cursor_quit_key='<Esc>'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"            Vim Expand Region             """"""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Press + to expand the visual selection and _ to shrink it.
+"map K <Plug>(expand_region_expand)
+"map J <Plug>(expand_region_shrink)
