@@ -841,8 +841,8 @@ let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
 "                  Gundo                   """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " f8 toggles the Gundo plugin window
-nnoremap <F8> :GundoToggle<CR>
-let g:gundo_width = 25
+nnoremap <Leader>r :GundoToggle<CR>
+let g:gundo_width = 30
 let g:gundo_close_on_revert = 1
 let g:gundo_preview_bottom = 1
 
@@ -870,7 +870,7 @@ let g:yankring_history_dir = '~/.vim/yankring'
 " this is so that single char deletes don't end up in the yankring
 let g:yankring_min_element_length = 2
 let g:yankring_window_height = 14
-nnoremap <leader>r :YRShow<CR>
+nnoremap <leader>b :YRShow<CR>
 "
 "this makes Y yank from the cursor to the end of the line, which makes more
 "sense than the default of yanking the whole current line (we can use yy for
