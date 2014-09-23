@@ -18,3 +18,6 @@ In Terminal.app, enter:
 	defaults -currentHost write -globalDomain AppleFontSmoothing -int 2
 
 - - - - -
+
+# skim backward search
+Command + Ctrl + mouse

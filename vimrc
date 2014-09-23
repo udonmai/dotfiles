@@ -152,7 +152,7 @@ let g:molokai_original = 1
 let g:rehash256 = 1
 
 " 字体
-set guifontwide=Consols:h14
+set guifontwide=Consolas:h14
 set guifont=Consolas:h14
 "set guifontwide=Monaco:h13
 "set guifont=Monaco:h13
@@ -768,6 +768,7 @@ endif
 let g:neocomplete#force_omni_input_patterns.tex =
       \ '\v\\\a*(ref|cite)\a*([^]]*\])?\{(|[^}]*,)'
 
+" ll for compilation | lv for view
 map <silent> <Leader>ls :silent
 	\ !/Applications/Skim.app/Contents/SharedSupport/displayline
 	\ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
