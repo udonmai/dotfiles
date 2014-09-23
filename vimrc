@@ -810,7 +810,7 @@ let g:clang_library_path = "/Applications/Xcode.app/Contents/Developer/Toolchain
 let g:unite_source_history_yank_enable = 1
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 
-nnoremap <Leader>f :Unite -start-insert -auto-preview buffer file_rec/async<CR>
+nnoremap <Leader>f :Unite -start-insert buffer file_rec/async<CR>
 nnoremap <Leader>o :Unite -start-insert -auto-preview outline<CR>
 nnoremap <Leader>g :Unite -start-insert grep:.<CR>
 nnoremap <Leader>m :Unite -start-insert buffer tab file_mru directory_mru<CR>
