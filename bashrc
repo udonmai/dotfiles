@@ -74,6 +74,9 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+# Pear
+export PATH="/Users/udonmai/pear/bin:$PATH"
+
 # using pyenv instead of virtualenvwrapper
 eval "$(pyenv init -)"
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
@@ -82,5 +85,5 @@ export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 source ~/.shp.sh
 
 # proxy
-#export http_proxy='proxy.kuins.net:8080'
+export http_proxy='proxy.kuins.net:8080'
 

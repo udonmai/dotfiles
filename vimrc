@@ -45,7 +45,7 @@ Plugin 'fholgado/minibufexpl.vim'
 "Plugin 'bufexplorer.zip'
 "Plugin 'Lokaltog/vim-powerline'
 Plugin 'bling/vim-airline'
-Plugin 'CSApprox' "Make gvim-only colorschemes work transparently in terminal vim
+Plugin 'godlygeek/csapprox' "Make gvim-only colorschemes work transparently in terminal vim
 
 " AutoComplete
 """""""""""""""""""""""""""""""
@@ -77,6 +77,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'Townk/vim-autoclose'
 Plugin 'matchit.zip'
 "Plugin 'spf13/PIV' "press K on a function for full PHP manual
+Plugin 'StanAngeloff/php.vim'
 Plugin 'shawncplus/phpcomplete.vim'
 
 " Tools
@@ -479,25 +480,16 @@ let g:miniBufExplModSelTarget = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " php editing
 " remove CR at end of lines
-let PHP_removeCRwhenUnix = 1
+"let PHP_removeCRwhenUnix = 1
 " Set up automatic formatting
-set formatoptions+=tcqlro
+"set formatoptions+=tcqlro
 "配置vimrc, 使得keywordprg=”help” 注：一般情况下，keywordprg默认是!man或!man -s
-autocmd BufNewFile,Bufread *.module,*.inc,*.php set keywordprg="help"
+"autocmd BufNewFile,Bufread *.module,*.inc,*.php set keywordprg="help"
 "php 语法高亮貌似有点问题"
 autocmd FileType php syntax on
 
 "autoload _vimrc
 "autocmd! bufwritepost _vimrc source %
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"               Python sp                   """""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""""""""""""
-"pydiction 1.2 python auto complete
-"filetype plugin on
-"let g:pydiction_location = '~/.vim/bundle/Pydiction'
-"defalut g:pydiction_menu_height == 15	
-"let g:pydiction_menu_height = 20 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "              indent guides                """""""""""""""""""""
@@ -653,10 +645,10 @@ let g:neocomplete#dictionary_filetype_lists = {
 	\ 'default' : '',
 	\ 'vimshell' : $HOME.'/.vimshell_hist',
 	\ 'scheme' : $HOME.'/.gosh_completions',
-	\ 'php' : $HOME.'/.vim/dict/php.dic',
 	\ }
-"	\ 'css' : $HOME.'.vim/dict/css.dic',
-"	\ 'javascript' : $HOME.'.vim/dict/javascript.dic'
+  "\ 'php' : $HOME.'/.vim/dict/php.dic',
+  "	\ 'css' : $HOME.'.vim/dict/css.dic',
+  "	\ 'javascript' : $HOME.'.vim/dict/javascript.dic'
 
 "include_complete be abled "ctags
 let g:neocomplete#ctags_command = '/usr/local/bin/ctags'
@@ -913,7 +905,7 @@ let g:jedi#popup_on_dot = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " 给每个目录单独建tag文件
 set tags=./.tags;,~/.vim/tags
-autocmd FileType php :set tags+=~/.vim/tags/php
+"autocmd FileType php :set tags+=~/.vim/tags/php
 let g:easytags_cmd = '/usr/local/bin/ctags'
 let g:easytags_file = '~/.vim/tags/tags'
 "let g:easytags_dynamic_files = 1
