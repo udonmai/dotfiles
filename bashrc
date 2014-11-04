@@ -85,5 +85,4 @@ export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 source ~/.shp.sh
 
 # proxy
-export http_proxy='proxy.kuins.net:8080'
-
+#export http_proxy='proxy.kuins.net:8080'
