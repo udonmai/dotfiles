@@ -23,12 +23,14 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'JavaScript-syntax'
 Plugin 'jQuery'
 Plugin 'othree/html5.vim'
+Plugin 'slim-template/vim-slim'
 Plugin 'groenewege/vim-less'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'Markdown'
 Plugin 'Markdown-syntax'
 "Plugin 'php.vim-html-enhanced' "一个TAB为3个空格 = =
-Plugin 'skammer/vim-css-color' "增加了rgb显示颜色和同行显示多处颜色
+"Plugin 'skammer/vim-css-color' "增加了rgb显示颜色和同行显示多处颜色
+Plugin 'ap/vim-css-color' "fast fork of above
 Plugin 'Valloric/vim-operator-highlight'
 
 " User Interface
@@ -321,10 +323,10 @@ set completeopt=menuone
 " autocommands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("autocmd") 
-	autocmd FileType xml,html,css,js,javascript,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,markdown,sh,md,tex set number
+	autocmd FileType xml,html,slim,css,js,javascript,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,markdown,sh,md,tex set number
 	autocmd Filetype python setlocal textwidth=79 expandtab tabstop=4 shiftwidth=4
 	autocmd Filetype php setlocal expandtab tabstop=4 shiftwidth=4
-	autocmd FileType haskell,puppet,ruby,javascript,html,yaml,sass,scss,css,jinja,vim setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd FileType haskell,puppet,ruby,javascript,html,slim,yaml,sass,scss,css,jinja,vim setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd FileType text setlocal textwidth=80
 	autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o
 	autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
