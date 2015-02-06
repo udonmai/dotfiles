@@ -793,7 +793,8 @@ map <silent> <Leader>ls :silent
 
 let g:LatexBox_viewer = 'open -a /Applications/Skim.app'
 "let g:LatexBox_viewer = 'Skim'
-let g:LatexBox_latexmk_options = "-pdflatex='pdflatex -synctex=1 \%O \%S'"
+"let g:LatexBox_latexmk_options = "-pdflatex='pdflatex -synctex=1 \%O \%S'"
+let g:LatexBox_latexmk_options = "-pdflatex='xelatex \%O \%S'"
 let g:LatexBox_latexmk_async = 1
 let g:LatexBox_latexmk_preview_continuously = 1
 let g:LatexBox_quickfix = 2
@@ -820,6 +821,7 @@ let g:clang_use_library = 1
 let g:clang_complete_auto = 0
 let g:clang_auto_select = 0
 "let g:clang_user_options = '|| exit 0'
+let g:clang_user_options = '-std=c++11'
 let g:clang_library_path = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -855,6 +857,8 @@ let g:syntastic_python_checkers=['flake8']
 let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
 "phpcs，tab 4个空格，编码参考使用CodeIgniter风格
 let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = '-std=c++11'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                  Gundo                   """""""""""""""""""""

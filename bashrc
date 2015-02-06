@@ -84,5 +84,8 @@ export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 # promptline
 source ~/.shp.sh
 
+# npm auto completion
+source ~/dotfiles/npm-completion.sh
+
 # proxy
 #export http_proxy='proxy.kuins.net:8080'
